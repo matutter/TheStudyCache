@@ -1,0 +1,36 @@
+h1
+{
+color: rgb(51, 51, 51);
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 18px;
+font-weight: 700;
+text-align: center;
+}
+
+.page-header
+{
+margin:0px 0px 0px 0px;
+border-bottom:0px;	
+	
+}
+
+
+.col-md-8
+{
+background: none;
+
+	
+}
+
+.col-md-4
+{
+background: none;
+
+
+}
+
+
+.head1 
+{
+height:40px;	
+}

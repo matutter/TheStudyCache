@@ -1,0 +1,73 @@
+.main
+{
+width:90%;
+}
+
+.row
+{
+margin-left: 0px;
+margin-right: 0px;
+}
+
+.head-top
+{
+padding-top: 2px;
+}
+
+.head-left
+{
+padding-top: 8px;
+
+}
+
+.head-middle
+{
+}
+
+.nav > li > a {
+  position: relative;
+  display: block;
+  padding: 8px 15px;
+}
+
+.panel-heading
+{
+height:40px;
+}
+
+.panel-title a
+{
+color: #428bca;
+text-decoration: none;
+}
+
+.search
+{
+width: 70%;
+margin-left: 30%;
+}
+.search-span
+{
+margin-top: 3px;
+margin-bottom: 3px;
+}
+
+.panel-body
+{
+height: 80%;
+}
+
+.top-right
+{
+margin-left: 91%;
+}
+
+.panel-primary
+{
+blackground:#00A1E2;
+}
+
+.home{ }
+.profile{ }
+.workbook{ }
+.upload{ }
