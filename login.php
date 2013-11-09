@@ -33,8 +33,7 @@ if($_POST && !empty($_POST['REGusername']) && !empty($_POST['REGpwd']) && !empty
 <link rel="stylesheet" type="text/css" href="css/carousel.css"/>
 <link rel="stylesheet" type="text/css" href="css/login.css"/>
 
-
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="../js/jquery.js"></script>
 <script src="js/bootstrap-transition.js"></script>
 <script src="js/bootstrap-scrollspy.js"></script>
 <script src="js/bootstrap-carousel.js"></script>

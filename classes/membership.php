@@ -10,6 +10,7 @@ class MEMBERSHIP {
 		//$check = $sql->verify_user_and_pass($un,md5($pwd));
 		if($check) {
 		$_SESSION['status'] = 'auth';
+		$_SESSION['user']	= $un;
 		header("location: index.php"); //better to return a bool but this makes it simple
 		} else return "No such user and password found.";
 	}

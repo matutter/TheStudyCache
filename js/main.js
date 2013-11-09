@@ -1,33 +1,37 @@
 $(document).ready(function(){
 	//initial  states
-	$('div.profile').hide();
-	$('div.workbook').hide();
-	$('div.upload').hide();
+	//$('div.home').load('../classes/home.php');
+	$('div.upload').load('../classes/upload.php');
 	//content behavior
+	// primary nav tabs
 	$(function(){
 		$('li.home').click(function(){
 	        $(this).addClass('active').removeClass('disable');
 	        	$(this).siblings().removeClass('active').addClass('disable');
-	        		$('div.home').show().siblings().hide();
+	        		$('div.home').load('../classes/home.php').show().siblings().hide();
 		});
 		$('li.profile').click(function(){
 	        $(this).addClass('active').removeClass('disable');
 	        	$(this).siblings().removeClass('active').addClass('disable');
-	        	        $('div.profile').show().siblings().hide();
+	        		$('div.profile').load('../classes/profile.php').show().siblings().hide();
 		});
 		$('li.workbook').click(function(){
 	        $(this).addClass('active').removeClass('disable');
 	        	$(this).siblings().removeClass('active').addClass('disable');
-	        		    $('div.workbook').show().siblings().hide();
+	        		$('div.workbook').load('../classes/workbook.php').show().siblings().hide();
 		});
 		$('li.upload').click(function(){
 	        $(this).addClass('active').removeClass('disable');
 	        	$(this).siblings().removeClass('active').addClass('disable');
-	        		 $('div.upload').show().siblings().hide();
+	        		$('div.upload').load('../classes/upload.php').show().siblings().hide();
 		});
+		//end nav tabs
+
+  		
+
+
+
 	});
-
-
 });
 
 
@@ -47,3 +51,4 @@ $(document).ready(function(){
 //	        $(this).siblings().removeClass('active').addClass('disable');
 //	    });
 //	});
+

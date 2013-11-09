@@ -1,3 +1,8 @@
+body
+{
+background-color: #EEE;
+}
+
 .main
 {
 width:90%;
@@ -24,7 +29,8 @@ padding-top: 8px;
 {
 }
 
-.nav > li > a {
+.nav > li > a
+{
   position: relative;
   display: block;
   padding: 8px 15px;
@@ -37,7 +43,7 @@ height:40px;
 
 .panel-title a
 {
-color: #428bca;
+color: #0099ff;
 text-decoration: none;
 }
 
@@ -65,6 +71,66 @@ margin-left: 91%;
 .panel-primary
 {
 blackground:#00A1E2;
+}
+
+.btn-primary
+{
+background-color: #0099ff;
+}
+
+.btn-upload
+{
+background-color: #0099ff;
+color:#FFF;
+font-size: 18px;
+width:100%;
+}
+.btn-upload:hover
+{
+background-color: #0076c4;
+color:#FFF;
+}
+
+.input-group-lg
+{
+margin-bottom: 10px;
+}
+textarea.input-large
+{
+margin-bottom: 10px;
+}
+
+.panel-upload
+{
+border-radius: 5px;
+padding: 10px;
+background-color: #DDD;
+margin-left: 25%;
+}
+
+.drop-zone
+{
+border-color: #BBB;
+border-radius: 5px;
+border-style: dashed;
+border-width: 2px;
+color: #BBB;
+font-size: 27px;
+height: 184px;
+line-height: normal;
+padding: 55px;
+text-align: center;
+width: 80%;
+margin-left: 10%;
+margin-right: 10%;
+margin-top: 5%;
+margin-bottom:5%;
+}
+
+.row-fix
+{
+
+width: 100%;
 }
 
 .home{ }

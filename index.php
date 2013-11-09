@@ -2,7 +2,6 @@
 require_once 'classes/membership.php';
 $membership = new MEMBERSHIP();
 $membership->confirm();
-
 ?>
 
 
@@ -16,12 +15,13 @@ $membership->confirm();
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css">
 <link rel="stylesheet" href="../css/bootstrap.css"/>
 <link rel="stylesheet" href="../css/main.css"/>
+
 <!--[if 1t IE 7]>
 <script type="text/javascript" src="js/DD_belatedPNG_0.0.7a-min.js">
 <![endif]-->
-<script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+<script src="../js/jquery.js"></script>
 <script src="../js/bootstrap.js"></script>
-<script src="js/main.js"></script>
+<script src="../js/main.js"></script>
 
 <title>The Study Team</title>
 <!-- main blue to use #00A1E2 -->
@@ -30,7 +30,9 @@ $membership->confirm();
 <body>
 <div class="container main">
     <div class="row">
+
         <div class="navbar-right">
+            Hello <?php echo $_SESSION['user']; ?>!
             <a type="button" class="btn" href="#debug"> Debug </a> <a type="button" class="btn btn-default" href="login.php?status=loggedout"><i class="fa fa-sign-out">Logout</i></a>
         </div>
     </div>
@@ -73,21 +75,13 @@ $membership->confirm();
         </div>
     <div class="panel-body">
 
-        <div class="home">
-            <?php include "classes/home_loader.php"; ?>
-        </div>
+        <div class="home"></div>
 
-        <div class="profile">
-            <?php include "classes/profile_loader.php"; ?>
-        </div>
+        <div class="profile"></div>
 
-        <div class="workbook">
-            <?php include "classes/workbook_loader.php"; ?>
-        </div>
+        <div class="workbook"></div>
 
-        <div class="upload">
-            <?php include "classes/upload_loader.php"; ?>
-        </div>
+        <div class="upload"> </div>
 
     </div>
 </div>
