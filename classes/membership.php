@@ -11,7 +11,8 @@ class MEMBERSHIP {
 		if($check) {
 		$_SESSION['status'] = 'auth';
 		$_SESSION['user']	= $un;
-		header("location: index.php"); //better to return a bool but this makes it simple
+		header("location: http://study.cs.sunyit.edu/"); //better to return a bool but this makes it simple
+		//echo "<script> window.location.reload(); </script"; 
 		} else return "No such user and password found.";
 	}
 

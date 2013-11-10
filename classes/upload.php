@@ -1,6 +1,28 @@
+<?php
+require_once 'uploader.php';
+$upload = new UPLOAD;
+
+
+if($_POST && $_FILES["file"]["error"] == 0 && !empty($_POST['title']) && !empty($_POST['subject']) && !empty($_POST['type']) && !empty($_POST['instructor']) && !empty($_POST['class']) && !empty($_POST['description']))
+{
+	$target = "uploads/" . time() .$_FILES['file']['name'];
+	$upload -> do_upload(
+				$_POST['title'], $_POST['subject'],
+				$_POST['type'], $_POST['instructor'],
+				$_POST['class'], $_POST['description'], $target);
+
+	move_uploaded_file( $_FILES["file"]["tmp_name"], $target );
+}
+else if($_POST)
+{
+	header("location: upload_redirect_fail.php" );
+}
+?>
+
+
 <div class="col-md-6 panel-upload">
 
-	<form method="post" enctype="multipart/form-data"  action="upload.php">
+	<form method="post" enctype="multipart/form-data"  action="../classes/upload.php">
 		<div class="row-fix">
 	    	<input type="file" name="file" id="file"/>
 

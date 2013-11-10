@@ -7,6 +7,7 @@ class Mysql {
 	function __construct() { // constructor function
 		$this->con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or
 			die('Cannot connect.err0x00');
+			date_default_timezone_set('UTC');
 	}
 	// login function
 	function verify_user_and_pass($un, $pwd) {
@@ -48,8 +49,10 @@ class Mysql {
 				(title, subject, type, instructor, class, description, path, id, date)
 				VALUES (?,?,?,?,?,?,?,NULL,?)";
 
+		$now = date("Y/m/d");
+
 		if($try = $this->con->prepare($sql)) {
-			$try->bind_param('ssssssss',$title,$subj,$type,$instr,$class,$descr,$path,date("Y/m/d"));
+			$try->bind_param('ssssssss',$title,$subj,$type,$instr,$class,$descr,$path,$now);
 			if($try->execute()) return true;
 		}
 	}// end function
