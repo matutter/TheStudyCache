@@ -1,7 +1,7 @@
 $(document).ready(function(){
 	//initial  states
-	//$('div.home').load('../classes/home.php');
-	$('div.upload').load('../classes/upload.php');
+	$('div.home').load('../classes/home.php');
+	//$('div.upload').load('../classes/upload.php');
 	//content behavior
 	// primary nav tabs
 	$(function(){

@@ -52,3 +52,10 @@
 		}
 	}, false);
 }());
+
+$(document).ready(function(){
+	$('button.btn-upload').click(click(function(){
+		$('div.response').load('upload.php');
+
+	});
+});

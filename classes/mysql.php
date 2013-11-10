@@ -41,22 +41,9 @@ class Mysql {
 
 		}
 	}// end function
-}//end mysql class
 
-class UPLOAD {
-	private $con; 
-
-	function __construct() { 
-		$this->con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or
-			die('Cannot connect.err0x02');
-	}
-	
-	function upload_file($title, $subj,$type,$instr,$class,$descr,$path) {
-		$sql=	"INSERT INTO users
-				(id, username, password, email) VALUES
-				(NULL, ?, ?, ?)";
-
-
+	function upload_file($title, $subj,$type,$instr,$class,$descr,$path)
+	{
 		$sql=	"INSERT INTO upload
 				(title, subject, type, instructor, class, description, path, id, date)
 				VALUES (?,?,?,?,?,?,?,NULL,?)";
@@ -66,4 +53,4 @@ class UPLOAD {
 			if($try->execute()) return true;
 		}
 	}// end function
-} // end upload class
+}//end mysql class
