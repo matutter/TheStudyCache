@@ -56,4 +56,6 @@ class Mysql {
 			if($try->execute()) return true;
 		}
 	}// end function
+
+
 }//end mysql class

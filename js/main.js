@@ -26,13 +26,8 @@ $(document).ready(function(){
 	        		$('div.upload').load('../classes/upload.php').show().siblings().hide();
 		});
 		//end nav tabs
-
-  		
-
-
-
-	});
-});
+	}); // end func
+}); // end class
 
 
 

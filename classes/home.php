@@ -1,3 +1,15 @@
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script>
+
+$('li.fa').click(function D() {
+	var k = $(this).attr('id');
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){}});
+	$(this).parents('tr').fadeOut();
+});
+
+
+</script>
+
 
 
 
@@ -15,8 +27,10 @@
 		<th>Description</th>
 		<th>Date</th>
 		<th>Link</th>
+		<th>KILL</th>
 	</thead>
 	<tbody>
+
 <?php
 
 $con=mysqli_connect("localhost","root","root","sc_main");
@@ -31,7 +45,10 @@ $result = mysqli_query($con,"SELECT * FROM upload");
 while($row = mysqli_fetch_array($result))
   {
   echo "<tr> <td>";
-  echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='". "/classes/" . $row['path'] . "'>Link</a>";
+  if( $row['username'] == $_COOKIE["username"])
+	echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td><td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>';
+	else
+		echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td><td> " . ' ';
   echo "</td></tr>";
   }
 
