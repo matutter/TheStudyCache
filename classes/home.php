@@ -6,6 +6,7 @@
 <table class="table table-striped">
 	<thead> 
 		<th>#</th>
+		<th>Username</th>
 		<th>Title</th>
 		<th>Subject</th>
 		<th>Type</th>
@@ -30,7 +31,7 @@ $result = mysqli_query($con,"SELECT * FROM upload");
 while($row = mysqli_fetch_array($result))
   {
   echo "<tr> <td>";
-  echo $row['id'] . "</td><td> " . $row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='" . $row['path'] . "'>Link</a>";
+  echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='" . $row['path'] . "'>Link</a>";
   echo "</td></tr>";
   }
 

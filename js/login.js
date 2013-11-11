@@ -33,7 +33,7 @@ $(document).ready(function(){
 
 		$('button.btn-danger').click(function()
 		{
-		window.location = "http://localhost";
+		window.location = " ";
   		});
 
 

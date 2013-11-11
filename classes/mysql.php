@@ -43,16 +43,16 @@ class Mysql {
 		}
 	}// end function
 
-	function upload_file($title, $subj,$type,$instr,$class,$descr,$path)
+	function upload_file($title, $subj,$type,$instr,$class,$descr,$path, $un)
 	{
 		$sql=	"INSERT INTO upload
-				(title, subject, type, instructor, class, description, path, id, date)
-				VALUES (?,?,?,?,?,?,?,NULL,?)";
+				(title, subject, type, instructor, class, description, path, id, date, username)
+				VALUES (?,?,?,?,?,?,?,NULL,?,?)";
 
 		$now = date("Y/m/d");
 
 		if($try = $this->con->prepare($sql)) {
-			$try->bind_param('ssssssss',$title,$subj,$type,$instr,$class,$descr,$path,$now);
+			$try->bind_param('sssssssss',$title,$subj,$type,$instr,$class,$descr,$path,$now, $un);
 			if($try->execute()) return true;
 		}
 	}// end function
