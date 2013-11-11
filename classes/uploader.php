@@ -7,6 +7,7 @@ class UPLOAD {
 		$check = $sql->upload_file($title, $subj,$type,$instr,$class,$descr,$path);
 		if($check)
 		{
+
 			header("location: upload_redirect.php" );
 		}
 	}

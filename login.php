@@ -97,11 +97,11 @@ if($_POST && !empty($_POST['REGusername']) && !empty($_POST['REGpwd']) && !empty
 		</form>
 	<button class="btn btn-danger"><i class="fa fa-times fa-2x btn-"> Cancel</i></button>
 	<button class="btn btn-warning slide"><i class="fa fa-pencil fa-2x btn-"> Register</i></button>
-	<?php	if(isset($response) && isset($_SESSION['status']) && $_SESSION['status']!='reg-success') 
+	<?php	if(isset($response)  && $_SESSION['status']!='reg-success') 
 			{
 				echo "<div class='alert alert-danger'>" . $response . "</div>";
 			}
-			else if(isset($response) && isset($_SESSION['status']) && $_SESSION['status']=='reg-success')
+			else if(isset($response)  && $_SESSION['status']=='reg-success')
 			{
 				echo "<div class='alert alert-success'>" . $response . "</div>";
 			}
