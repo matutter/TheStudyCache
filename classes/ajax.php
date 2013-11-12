@@ -19,7 +19,7 @@ class Ajax {
 
 
 	function get_path_where_id($id,$un) {
-		$sql = "SELECT path FROM upload WHERE id = ? AND username =?";
+		$sql = "SELECT path FROM upload WHERE id = ? AND username = ?";
 
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('ss',$id,$un);
