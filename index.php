@@ -62,10 +62,10 @@ $membership->confirm();
                             <span class="sr-only">Toggle Dropdown</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li><a><strong>Major</strong></a></li>
+                            <li><a><strong>Search for</strong></a></li>
                         <li class="divider"></li>
-                            <li><a href="#">Computer Science</a></li>
-                            <li><a href="#">Phsycology</a></li>
+                            <li><a href="#">Users</a></li>
+                            <li><a href="#">Posts</a></li>
                         <li class="divider"></li>
                             <li><a href="#"><div class="fa fa-search-plus"></div> Advnaced Search</a></li>
                         </ul>
@@ -86,15 +86,15 @@ $membership->confirm();
     </div>
 </div>
 <div class="container">
-    <div class="col-md-6">
+    <div class="col-md-10">
         <div class="media">
             <a class="pull-left" href="#">
                 <img src="../images/logo_s.png" alt="StudyTeam" class="img-circle">
             </a>
             <div class="media-body">
-                <h4 class="media-heading">About Us</h4>
+                <h3 class="media-heading">About Us</h3>
                 <p class="lead">The StudyCache is an online collection of user uploaded and shared material for easy and useful studying.</p>
-                <p>See <a href="https://fossil.cs.sunyit.edu/project/2013_fall___study_cache">our fossil page</a> for project status.</p>
+                <p>Get the heck out of here fossil! See <a href="https://github.com/matutter/TheStudyCache">our Github page</a> for project status.</p>
             </div>
         </div>
     </div>

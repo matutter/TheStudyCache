@@ -33,7 +33,11 @@ $(document).ready(function(){
 
 		$('button.btn-danger').click(function()
 		{
-		window.location = " ";
+			$("form.form-horizontal").slideToggle(0,"linear",function(){ });
+			$("form.form-verticle").slideToggle(0,"linear",function(){ });
+			$("button.login").slideToggle(0,"linear",function(){ });
+			$("button.slide").slideToggle(0,"linear",function(){ });
+			$("button.btn-danger").slideToggle(0,"linear",function(){ });
   		});
 
 

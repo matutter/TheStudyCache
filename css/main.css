@@ -133,6 +133,11 @@ margin-bottom:5%;
 width: 100%;
 }
 
+.fa, .fa-thumbs-up :hover
+{
+cursor: pointer;
+}
+
 .home{ }
 .profile{ }
 .workbook{ }

@@ -53,9 +53,39 @@ class Mysql {
 
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('sssssssss',$title,$subj,$type,$instr,$class,$descr,$path,$now, $un);
-			if($try->execute()) return true;
+			if($try->execute()) {
+				return true;
+			}
 		}
 	}// end function
+
+	function new_rating_entry($un, $path) {
+		$sql = "SELECT id FROM users WHERE username = ?";
+		if($try = $this->con->prepare($sql)) {
+			$try->bind_param('s',$un);
+			$try->execute();
+			$try->bind_result($uid);
+
+			if($try->fetch()) {}
+		}
+		$try->close();
+		$sql = "SELECT id FROM upload WHERE path = ?";
+		if($try = $this->con->prepare($sql)) {
+			$try->bind_param('s',$path);
+			$try->execute();
+			$try->bind_result($pid);
+
+			if($try->fetch()) {}
+		}
+		$try->close();
+		$sql=	"INSERT INTO `rating`(uid, pid) VALUES ?,?)";
+		if($try = $this->con->prepare($sql)) {
+			$try->bind_param("ss",$uid,$pid);
+			if($try->execute()){}
+
+		}
+
+	}
 
 
 }//end mysql class

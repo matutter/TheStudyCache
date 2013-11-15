@@ -7,6 +7,18 @@ $('li.fa-times').click(function D() {
 	$(this).parents('tr').fadeOut();
 });
 
+$('li.fa-thumbs-up').click(function up() {
+	var pid = $(this).attr('pid');
+	var uid = $(this).attr('uid');
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid, by:uid}, success: function(){}});
+});
+
+
+$('li.fa-thumbs-down').click(function down() {
+	var pid = $(this).attr('pid');
+	var uid = $(this).attr('uid');
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(){}});
+});
 
 </script>
 
@@ -23,32 +35,77 @@ $('li.fa-times').click(function D() {
 		<th>Description</th>
 		<th>Date</th>
 		<th>Link</th>
-		<th>KILL</th>
-		<th>UP</th>
-		<th>DOWN</th>
+		<th>Destroy</th>
+		<th>Rate</th>
+
 	</thead>
 	<tbody>
 
 <?php
+require_once 'includes.php';
 
-$con=mysqli_connect("localhost","root","root","sc_main");
-// Check connection
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
+function get_ratings($pid){
 
+		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
+			die('Cannot connect.err0x00');
+		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid."");
+		while($row = mysqli_fetch_array($sql))
+		{
+			echo ($row['up'] - $row['down']);
+		}
+}
+
+$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or
+			die('Cannot connect.err0x00');
 $result = mysqli_query($con,"SELECT * FROM upload");
 
 while($row = mysqli_fetch_array($result))
-  {
-  echo "<tr> <td>";
-  if( $row['username'] == $_COOKIE["username"])
-	echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td><td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>' . "</td><td> " . '<li class="fa  fa-thumbs-up"> <span class="badge">42</span></li>' . "</td><td> " . '<li class="fa  fa-thumbs-down"> <span class="badge">42</span></li>' ;
+{
+	echo "<tr> <td>";
+	if( $row['username'] == $_COOKIE["username"])
+	{
+		echo $row['id'] . "</td>
+		<td> " . $row['username'] . "</td>
+		<td> " . $row['title'] . "</td>
+		<td> " . $row['subject'] . "</td>
+		<td> " . $row['type']  . "</td>
+		<td> " . $row['instructor'] . "</td>
+		<td> " . $row['class'] . "</td>
+		<td> " . $row['description'] . "</td>
+		<td> " . $row['date']  . "</td>
+		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
+		<td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>' . "</td>
+		<td> " . '<span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+			';
+
+		get_ratings($row['id']);
+
+		echo '</span>';
+	}
 	else
-		echo $row['id'] . "</td><td> " . $row['username'] . "</td><td> " .$row['title'] . "</td><td> " . $row['subject'] . "</td><td> " . $row['type']  . "</td><td> " . $row['instructor'] . "</td><td> " . $row['class'] . "</td><td> " . $row['description'] . "</td><td> " . $row['date']  . "</td><td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td><td> " . ' '. "</td><td> " . '<li class="fa  fa-thumbs-up"> <span class="badge">42</span></li>' . "</td><td> " . '<li class="fa  fa-thumbs-down"> <span class="badge">42</span></li>' ;
-  echo "</td></tr>";
-  }
+	{
+		echo $row['id'] . "</td>
+		<td> " . $row['username'] . "</td>
+		<td> " . $row['title'] . "</td>
+		<td> " . $row['subject'] . "</td>
+		<td> " . $row['type']  . "</td>
+		<td> " . $row['instructor'] . "</td>
+		<td> " . $row['class'] . "</td>
+		<td> " . $row['description'] . "</td>
+		<td> " . $row['date']  . "</td>
+		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
+		<td> " . ' '. "</td>
+		<td> " . '<li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+			</li><span class="badge">';
+
+			get_ratings($row['id']);
+
+		echo '</span>';
+	}
+	echo "</td></tr>";
+	}
 
 mysqli_close($con);
 
