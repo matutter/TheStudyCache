@@ -14,7 +14,7 @@ class MEMBERSHIP {
 		setcookie("username", $un, time()+3600*48);
 		header('location: index.php' ); //better to return a bool but this makes it simple
 		//echo "<script> window.location.reload(); </script"; 
-		} else return "No such user and password found.";
+		} else return "No such user or password found.";
 	}
 
 	function validate_new_user($un, $pwd, $email) {
@@ -46,9 +46,3 @@ class MEMBERSHIP {
 	}
 
 }
-
-
-
-
-
-
