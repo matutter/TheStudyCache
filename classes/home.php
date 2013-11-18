@@ -27,12 +27,24 @@ function dv_callback(data)
   $('.dv-body').append(data['summary']);
   $('.test').append('<iframe id="content" scrolling="no" class="background" src="../classes/'+data['path']+'"></iframe>');
 
-  $('#content').load(function(){
-    var iframe = $('#content').contents();
-    iframe.dblclick(function(){
-      $('.dv-body').fadeToggle('slow');
+
+    $('.dv-body-slider').hide();
+
+    $('.fa-chevron-down').click(function(){
+      $('.dv-heading').animate({width:"20%"});
+      $('.dv-body').fadeToggle('fast',function(){
+        $('.dv-body-slider').fadeToggle('fast');   
+      });
     });
-  });
+
+    $('.fa-chevron-up').click(function(){
+      $('.dv-heading').animate({width:"100%"});
+      $('.dv-body-slider').fadeToggle('fast',function(){
+        $('.dv-body').fadeToggle('fast');
+      });
+    });
+  
+
 }});
 
 </script>
@@ -51,7 +63,9 @@ function dv_callback(data)
         
 
       </div>
-      <div class="panel-body dv-body">
+      <div class="panel-body dv-body"> <i class="fa fa-chevron-down"></i>
+      </div>
+      <div class="panel-body dv-body-slider"> <i class="fa fa-chevron-up"></i>
       </div>
     </div>
   </div>
