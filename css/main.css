@@ -1,11 +1,41 @@
 body
 {
-background-color: #EEE;
+	color:#FFF;
+	/* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+	/* IE10 Consumer Preview */ 
+	background-image: -ms-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+	/* Mozilla Firefox */ 
+	background-image: -moz-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+	/* Opera */ 
+	background-image: -o-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+	/* Webkit (Safari/Chrome 10) */ 
+	background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #1F5E82), color-stop(1, #000000));
+	/* Webkit (Chrome 11+) */ 
+	background-image: -webkit-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+	/* W3C Markup, IE10 Release Preview */ 
+	background-image: linear-gradient(to bottom right, #1F5E82 0%, #000000 100%);
+	background-size: 100%;
+	height: 995px;
+	/* fix for full screen */
+}
+
+
+
+.media-body
+{
+color: #FFF;
 }
 
 .main
 {
+min-width: 902px;
 width:90%;
+}
+
+a.btn:hover, a:hover
+{
+color:#f97e13;	
+text-decoration: none;
 }
 
 .row
@@ -29,16 +59,23 @@ padding-top: 8px;
 {
 }
 
+.nav-tabs > li.active > a
+{
+	background-color:#eaeff1;
+}
+
 .nav > li > a
 {
   position: relative;
   display: block;
   padding: 8px 15px;
+  background-color: transparent;
 }
 
 .panel-heading
 {
 height:40px;
+background-color:rgba(255,255,255,.7);
 }
 
 .panel-title a
@@ -47,19 +84,17 @@ color: #0099ff;
 text-decoration: none;
 }
 
-.search
-{
-width: 70%;
-margin-left: 30%;
-}
+
 .search-span
 {
 margin-top: 3px;
 margin-bottom: 3px;
 }
 
-.panel-body
+.panel-body, .panel-default
 {
+background-color:rgba(255,255,255,.7);
+color: #000;
 height: 80%;
 }
 
@@ -108,25 +143,6 @@ background-color: #DDD;
 margin-left: 25%;
 }
 
-.drop-zone
-{
-border-color: #BBB;
-border-radius: 5px;
-border-style: dashed;
-border-width: 2px;
-color: #BBB;
-font-size: 27px;
-height: 184px;
-line-height: normal;
-padding: 55px;
-text-align: center;
-width: 80%;
-margin-left: 10%;
-margin-right: 10%;
-margin-top: 5%;
-margin-bottom:5%;
-}
-
 .row-fix
 {
 
@@ -138,8 +154,134 @@ width: 100%;
 cursor: pointer;
 }
 
+
+/**********************************************************/
+/* DOC VIEW */
+
+.dv-panel
+{
+	height:600px;
+	padding: 0px;
+	border-bottom: 1px solid transparent;
+	border-radius: 3px;
+	border-color: rgba(0,0,0,0.9);
+	background-color: black;
+	background-size:100%;
+	background-repeat:no-repeat;
+}
+
+.dv-span, .dv-span :hover
+{
+cursor: pointer;
+width: 100%;
+height: 100%;
+}
+
+.dv-heading
+{
+	position: relative;
+	z-index: 2;
+	height: 60px;
+	padding: 10px 15px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+	border-color: rgba(0,0,0,0.9);
+	background-color:rgba(0,0,0,0.9); 
+}
+
+.dv-body
+{	
+	z-index: 2;
+	position: relative;
+	margin-top: -180px;
+	min-height: 180px;
+	max-height: 180px;
+	color:#fff;
+	border-bottom-left-radius: 3px;
+	border-bottom-right-radius: 3px;
+	border-color: rgba(0,0,0,0.9);
+	background-color:rgba(0,0,0,.9);
+}
+
+.dv-heading > h2
+{
+	display: inline;
+	font-size: 1.7em;
+	font-weight: 700;
+	color: #FFF;
+}
+.dv-heading > cite
+{
+	color: #7C7C7C;
+	font-size: .7em;
+	z-index: 10;
+}
+.dv-title {}
+.dv-breadcrumb {}
+.dv-user
+{
+	display:inline;
+}
+.dv-breadcrumb > ol.breadcrumb
+{
+background-color: transparent;
+padding: 0px;
+}
+
+.dv-r-col
+{
+	min-height: 140px;
+	border-left-width: 4px;
+	border-left-color: #999999;
+	border-left-style: dotted;
+}
+
+.list-group-item
+{
+	background-color: transparent;
+	border:none;
+	padding:4px;
+}
+
+cite
+{
+	font-size: .7em;
+}
+iframe
+{
+	z-index:1;
+	position:relative;
+	top:-60px;
+	display:inline-block;
+	overflow: hidden;
+	height:600px;
+	width: 100%;
+	border-width: 0px;
+	border-radius: 3px;
+	background-color: transparent;
+	cursor:pointer;
+}
+.test{}
+
+/**********************************************************/
+
+
+
+
+.footer
+{
+	margin-top: 5%;
+}
+
+
+/**********************************************************/
+/* NAV SELECTORS */
+
 .home{ }
 .profile{ }
 .workbook{ }
 .upload{ }
 .response{}
+.browse{}
+.docview{}
+/**********************************************************/

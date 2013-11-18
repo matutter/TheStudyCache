@@ -43,16 +43,17 @@ $membership->confirm();
                 <h2 class="panel-title"><b>The<a href="#">StudyCache</a></b></h2>
             </div>
             <!-- middle 2/3 -->
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <ul class="nav nav-tabs">
-                    <li class="home active"><a href="#home">Home</a></li>
-                    <li class="profile disable"><a href="#profile">Profile</a></li>
-                    <li class="workbook disable"><a href="#workbook">WorkBook</a></li>
-                    <li class="upload disable"><a href="#upload">Upload</a></li>
+                    <li class="home active"><a href="#">Home</a></li>
+                    <li class="profile disable"><a href="#">Profile</a></li>
+                    <li class="workbook disable"><a href="#">WorkBook</a></li>
+                    <li class="upload disable"><a href="#">Upload</a></li>
+                    <li class="browse disable"><a href="#">Browse</a></li>                    
                 </ul>
             </div>
             <!-- last 3/3 -->
-            <div class="col-md-6">
+            <div class="col-md-4">
                 <div class="input-group search">
                     <input type="text" class="form-control">
                     <div class="input-group-btn">
@@ -83,22 +84,18 @@ $membership->confirm();
 
         <div class="upload"> </div>
 
+        <div class="browse"> </div>
+
     </div>
 </div>
-<div class="container">
-    <div class="col-md-10">
-        <div class="media">
-            <a class="pull-left" href="#">
-                <img src="../images/logo_s.png" alt="StudyTeam" class="img-circle">
-            </a>
-            <div class="media-body">
-                <h3 class="media-heading">About Us</h3>
+</div>
+    <div class="container footer">
+            <div class="media media-body">
+                <h3 class="media-heading"><strong>About Us</strong></h3>
                 <p class="lead">The StudyCache is an online collection of user uploaded and shared material for easy and useful studying.</p>
                 <p>Get the heck out of here fossil! See <a href="https://github.com/matutter/TheStudyCache">our Github page</a> for project status.</p>
             </div>
-        </div>
     </div>
-</div>
-</div>
+
 </body>
 </html>

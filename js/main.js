@@ -25,6 +25,16 @@ $(document).ready(function(){
 	        	$(this).siblings().removeClass('active').addClass('disable');
 	        		$('div.upload').load('../classes/upload.php').show().siblings().hide();
 		});
+		$('li.browse').click(function(){
+	        $(this).addClass('active').removeClass('disable');
+	        	$(this).siblings().removeClass('active').addClass('disable');
+	        		$('div.browse').load('../classes/browse.php').show().siblings().hide();
+		});
+		$('a.docview').click(function(){
+	        $(this).addClass('active').removeClass('disable');
+	        	$(this).siblings().removeClass('active').addClass('disable');
+	        		$('div.docview').load('../classes/docview.php').show().siblings().hide();
+		});
 		//end nav tabs
 	}); // end func
 }); // end class

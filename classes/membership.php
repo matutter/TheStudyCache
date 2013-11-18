@@ -11,7 +11,7 @@ class MEMBERSHIP {
 		if($check) {
 		$_SESSION['status'] = 'auth';
 		$_SESSION['user']	= $un;
-		setcookie("username", $un, time()+3600*24);
+		setcookie("username", $un, time()+3600*48);
 		header('location: index.php' ); //better to return a bool but this makes it simple
 		//echo "<script> window.location.reload(); </script"; 
 		} else return "No such user and password found.";

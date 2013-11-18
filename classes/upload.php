@@ -3,6 +3,10 @@ require_once 'uploader.php';
 
 ?>
 
+<script>	
+	$('input.form-control').attr('maxlength',35);
+</script>
+
 
 <div class="col-md-6 panel-upload">
 

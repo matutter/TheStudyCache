@@ -1,116 +1,87 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<!-- document view -->
 <script>
+$(document).ready(function(){
 
-$('li.fa-times').click(function D() {
-	var k = $(this).attr('id');
-	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){}});
-	$(this).parents('tr').fadeOut();
+$.ajax({
+    type: "POST",
+    async:true,
+    url: "../classes/ajax.php",
+    data: {find:"latest"},
+    success: function(pid){ focus(pid); }
 });
 
-$('li.fa-thumbs-up').click(function up() {
-	var pid = $(this).attr('pid');
-	var uid = $(this).attr('uid');
-	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid, by:uid}, success: function(){}});
-});
+function focus(pid) 
+{
+  $.ajax({
+      type: "POST", dataType: "json", url: "../classes/ajax.php", data: {dv:pid},
+      success: function(data){ dv_callback(data); }
+  });
+}
+function dv_callback(data)
+{
+  //$('div.dv-panel').css('background-image', 'url(../classes/' + data['path'] + ')');
+  $('div.dv-panel').attr('href', '/classes/' + data['path']); 
+  $('.dv-title').append(data['ttl']);
+  $('.dv-user').append(data['user']);
+  $('.dv-breadcrumb').append('<ol class="breadcrumb"><li><a href="#">'+ data['sbj'] + '</a></li><li><a href="#">'+ data['cls'] +'</a></li><li><a href="#">'+ data['typ'] +'</a></li><li class="active">'+ data['ttl'] +'</li></ol>');
+  $('.dv-body').append(data['summary']);
+  $('.test').append('<iframe id="content" scrolling="no" class="background" src="../classes/'+data['path']+'"></iframe>');
 
-
-$('li.fa-thumbs-down').click(function down() {
-	var pid = $(this).attr('pid');
-	var uid = $(this).attr('uid');
-	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(){}});
-});
+  $('#content').load(function(){
+    var iframe = $('#content').contents();
+    iframe.dblclick(function(){
+      $('.dv-body').fadeToggle('slow');
+    });
+  });
+}});
 
 </script>
 
+<!-- START LEFT ELEMENTS -->
+<div class="col-md-8">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="dv-panel">
+        <div class="dv-heading">
+            <h2 class="dv-title"></h2> <cite> by <div class="dv-user"></div></cite>
+            <div class="dv-breadcrumb"></div>
+        </div>
+        
+          <div class="test"> </div>
+        
 
-<table class="table table-striped">
-	<thead> 
-		<th>#</th>
-		<th>Username</th>
-		<th>Title</th>
-		<th>Subject</th>
-		<th>Type</th>
-		<th>Instructor</th>
-		<th>Class</th>
-		<th>Description</th>
-		<th>Date</th>
-		<th>Link</th>
-		<th>Destroy</th>
-		<th>Rate</th>
-
-	</thead>
-	<tbody>
-
-<?php
-require_once 'includes.php';
-
-function get_ratings($pid){
-
-		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
-			die('Cannot connect.err0x00');
-		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid."");
-		while($row = mysqli_fetch_array($sql))
-		{
-			echo ($row['up'] - $row['down']);
-		}
-}
-
-$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or
-			die('Cannot connect.err0x00');
-$result = mysqli_query($con,"SELECT * FROM upload");
-
-while($row = mysqli_fetch_array($result))
-{
-	echo "<tr> <td>";
-	if( $row['username'] == $_COOKIE["username"])
-	{
-		echo $row['id'] . "</td>
-		<td> " . $row['username'] . "</td>
-		<td> " . $row['title'] . "</td>
-		<td> " . $row['subject'] . "</td>
-		<td> " . $row['type']  . "</td>
-		<td> " . $row['instructor'] . "</td>
-		<td> " . $row['class'] . "</td>
-		<td> " . $row['description'] . "</td>
-		<td> " . $row['date']  . "</td>
-		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
-		<td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>' . "</td>
-		<td> " . '<span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			';
-
-		get_ratings($row['id']);
-
-		echo '</span>';
-	}
-	else
-	{
-		echo $row['id'] . "</td>
-		<td> " . $row['username'] . "</td>
-		<td> " . $row['title'] . "</td>
-		<td> " . $row['subject'] . "</td>
-		<td> " . $row['type']  . "</td>
-		<td> " . $row['instructor'] . "</td>
-		<td> " . $row['class'] . "</td>
-		<td> " . $row['description'] . "</td>
-		<td> " . $row['date']  . "</td>
-		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
-		<td> " . ' '. "</td>
-		<td> " . '<li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			</li><span class="badge">';
-
-			get_ratings($row['id']);
-
-		echo '</span>';
-	}
-	echo "</td></tr>";
-	}
-
-mysqli_close($con);
+      </div>
+      <div class="panel-body dv-body">
+      </div>
+    </div>
+  </div>
 
 
+  <div class="col-md-8">
+    other tabs for interaction, download, comments, history, ect..
+  </div>
 
-?>
-	</tbody>
-</table>
+</div>
+<!-- END LEFT ELEMENTS --> 
+
+
+<!-- START RIGHT ELEMENTS -->
+ <div class="col-md-4">
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading">More by poster</div>
+     <div class="panel-body">
+        sub data + thumbnail
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12">
+    <div class="panel panel-default">
+      <div class="panel-heading"> = </div>
+     <div class="panel-body">
+          + 
+      </div>
+    </div>
+  </div>
+</div>
