@@ -157,8 +157,7 @@ margin-left: 25%;
 
 .row-fix
 {
-
-width: 100%;
+	width: 100%;
 }
 
 .fa, .fa-thumbs-up :hover
@@ -275,7 +274,7 @@ padding: 0px;
 	z-index: 30;
 	position: absolute;
 	display: block;
-	left:1020px;
+	right:20px;
 	bottom: 10px;
 }
 
@@ -284,7 +283,7 @@ padding: 0px;
 	z-index: 30;
 	position: absolute;
 	display: block;
-	left:1020px;
+	right:20px;
 	bottom: 10px;
 }
 

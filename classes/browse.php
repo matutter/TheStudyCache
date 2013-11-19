@@ -18,6 +18,21 @@ $('li.fa-thumbs-down').click(function down() {
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(){}});
 });
 
+
+function locationHashChanged() {
+    var hash = window.location.hash;
+    var res = hash.match(/[a-zA-Z]/g);
+
+    if(res=='h') {
+      $('li.home').addClass('active').removeClass('disable');
+            $('li.home').siblings().removeClass('active').addClass('disable');
+              $('div.home').load('../classes/home.php').show().siblings().hide();
+	}
+}
+window.onhashchange = locationHashChanged;
+
+
+
 </script>
 
 
@@ -71,7 +86,7 @@ while($row = mysqli_fetch_array($result))
 		<td> " . $row['class'] . "</td>
 		<td> " . $row['description'] . "</td>
 		<td> " . $row['date']  . "</td>
-		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
+		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
 		<td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>' . "</td>
 		<td> " . '<span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
 			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
@@ -92,7 +107,7 @@ while($row = mysqli_fetch_array($result))
 		<td> " . $row['class'] . "</td>
 		<td> " . $row['description'] . "</td>
 		<td> " . $row['date']  . "</td>
-		<td><a href='". "/classes/" . $row['path'] . "'>Link</a> " . "</td>
+		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
 		<td> " . ' '. "</td>
 		<td> " . '</li><span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
 			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>

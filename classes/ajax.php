@@ -73,9 +73,11 @@ class Ajax {
 		}
 	}
 
-	function latest_post(){
-		if(isset($_POST['pid'])) {
-			echo $_POST['pid'];
+	function latest_post($find){
+		if( is_array($find) )
+			$find = implode("|",$find);
+		if( strcmp($find, "latest") != 0) {
+			echo $find;
 		} 
 		else {
 			$sql = "SELECT id FROM upload ORDER BY id DESC LIMIT 1";

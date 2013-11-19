@@ -37,8 +37,6 @@ class Mysql {
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('sss',$un,$pwd,$email);
 			if($try->execute()) return true;
-			
-
 
 		}
 	}// end function
