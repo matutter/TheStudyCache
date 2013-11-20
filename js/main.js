@@ -4,6 +4,7 @@ $(document).ready(function(){
 	//$('div.upload').load('../classes/upload.php');
 	//content behavior
 	// primary nav tabs
+	
 	$(function(){
 
 		var hash = window.location.hash;
@@ -75,24 +76,8 @@ $(document).ready(function(){
 	        		$('div.docview').load('../classes/docview.php').show().siblings().hide();
 		});
 		//end nav tabs
-
-		
 	}); // end func
-
-
-
-
-
-
-
-
-		//alert(window.location.hash);
-
-	
-
 }); // end class
-
-
 
 
 ///////////////////////////////////////////////////////////////////////////

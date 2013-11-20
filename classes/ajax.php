@@ -47,6 +47,8 @@ class Ajax {
 		if($try->fetch()) {
 			$row6 = str_replace('\\','/',$row6);
 			$row6 = str_replace(' ','%20',$row6);
+			$download = $row6;
+			//$row6 = str_replace('/','%2F',$row6);
 			$res['sbj'] = $row1;
 			$res['cls'] = $row2;
 			$res['typ'] = $row3;
@@ -61,7 +63,7 @@ class Ajax {
             <li class="list-group-item">Instructor: '.$row8.'</li>
             <li class="list-group-item">Class: '.$row2.'</li>
             <li class="list-group-item">Subject: '.$row1.'</li>
-            <li class="list-group-item"><a download href="classes/'.$row6.'"><i class="fa fa-save"></i><strong> Download</strong></a></li>
+            <li class="list-group-item"><a download href="classes/'.$download.'"><i class="fa fa-save"></i><strong> Download</strong></a></li>
           </ul>
         </div>
         <div class="col-md-7 dv-r-col">

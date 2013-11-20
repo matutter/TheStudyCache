@@ -7,7 +7,6 @@ if(window.location.hash && window.location.hash.match(/\d+/g) != null)
 else 
   pid = "latest";
 
-
 $.ajax({
     type: "POST",
     async:true,
@@ -23,33 +22,35 @@ function focus(pid) {
   });
 }
 function dv_callback(data) {
-  //$('div.dv-panel').css('background-image', 'url(../classes/' + data['path'] + ')');
-  $('div.dv-panel').attr('href', '/classes/' + data['path']); 
-  $('.dv-title').append(data['ttl']);
-  $('.dv-user').append(data['user']);
-  $('.dv-breadcrumb').append('<ol class="breadcrumb"><li><a href="#">'+ data['sbj'] + '</a></li><li><a href="#">'+ data['cls'] +'</a></li><li><a href="#">'+ data['typ'] +'</a></li><li class="active">'+ data['ttl'] +'</li></ol>');
-  $('.dv-body').append(data['summary']);
-  $('.test').append('<iframe id="content" scrolling="no" class="background" background-position="center" src="../classes/'+data['path']+'"></iframe>');
+  name = $('.dv-title').text();
+  if($('#id' + name).length==0) {
 
-
+    //$('div.dv-panel').css('background-image', 'url(../classes/' + data['path'] + ')');
+    $('div.dv-panel').attr('href', '/classes/' + data['path']); 
+    $('.dv-title').append(data['ttl']);
+    $('.dv-title').attr('id',data['ttl']);
+    $('.dv-user').append(data['user']);
+    $('.dv-breadcrumb').append('<ol class="breadcrumb"><li><a href="#">'+ data['sbj'] + '</a></li><li><a href="#">'+ data['cls'] +'</a></li><li><a href="#">'+ data['typ'] +'</a></li><li class="active">'+ data['ttl'] +'</li></ol>');
+    $('.dv-body').append(data['summary']);
+    $('.test').append('<iframe id="content" scrolling="no" class="background" background-position="center" src="../classes/'+data['path']+'"></iframe>');
+  // $('.test').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');
     $('.dv-body-slider').hide();
 
-    $('.fa-chevron-down').click(function(){
-      
+    $('.fa-chevron-down').click(function() {
       $('.dv-heading').animate({opacity:0,width:"50%"},'fast');
-      $('.dv-body').fadeToggle('fast',function(){
+      $('.dv-body').fadeToggle('fast',function() {
         $('.dv-body-slider').fadeToggle('fast');   
       });
     });
-
-    $('.fa-chevron-up').click(function(){
-      
+    $('.fa-chevron-up').click(function() {
       $('.dv-heading').animate({opacity:100,width:"100%"},'fast');
       $('.dv-body-slider').fadeToggle('fast',function(){
         $('.dv-body').fadeToggle('fast');
       });
     });
-}});
+  } // end if 
+} // end callback
+}); // end function
 
 </script>
 

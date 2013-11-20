@@ -1,5 +1,4 @@
 <script>
-
 $('li.fa-times').click(function D() {
 	var k = $(this).attr('id');
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){}});
@@ -18,11 +17,9 @@ $('li.fa-thumbs-down').click(function down() {
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(){}});
 });
 
-
 function locationHashChanged() {
     var hash = window.location.hash;
     var res = hash.match(/[a-zA-Z]/g);
-
     if(res=='h') {
       $('li.home').addClass('active').removeClass('disable');
             $('li.home').siblings().removeClass('active').addClass('disable');
@@ -30,9 +27,6 @@ function locationHashChanged() {
 	}
 }
 window.onhashchange = locationHashChanged;
-
-
-
 </script>
 
 
