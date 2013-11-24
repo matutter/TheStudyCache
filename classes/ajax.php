@@ -63,6 +63,7 @@ class Ajax {
             <li class="list-group-item">Instructor: '.$row8.'</li>
             <li class="list-group-item">Class: '.$row2.'</li>
             <li class="list-group-item">Subject: '.$row1.'</li>
+            <li class="list-group-item">Type: '.substr(strrchr($row6,'.'),1).'</li>
             <li class="list-group-item"><a download href="classes/'.$download.'"><i class="fa fa-save"></i><strong> Download</strong></a></li>
           </ul>
         </div>

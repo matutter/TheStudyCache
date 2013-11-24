@@ -1,158 +1,85 @@
-body {
-font-family: helvetica, arial, sans-serif;
+body
+{
+  color:#FFF;
+  /* Note: This gradient may render differently in browsers that don't support the unprefixed gradient syntax */
+  /* IE10 Consumer Preview */ 
+  background-image: -ms-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+  /* Mozilla Firefox */ 
+  background-image: -moz-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+  /* Opera */ 
+  background-image: -o-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+  /* Webkit (Safari/Chrome 10) */ 
+  background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0, #1F5E82), color-stop(1, #000000));
+  /* Webkit (Chrome 11+) */ 
+  background-image: -webkit-linear-gradient(top left, #1F5E82 0%, #000000 100%);
+  /* W3C Markup, IE10 Release Preview */ 
+  background-image: linear-gradient(to bottom right, #1F5E82 0%, #000000 100%);
+  background-size: 100%;
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* fix for full screen */
 }
 
-#login {
-text-align: center;
-background: #e3e3e3 url(images/whiteGradient.png) no-repeat top left;
-border:1px solid #CFCFCF;
-min-height:330px;
-_height: 330px;
-width: 705px;
-position:relative;
-left: 50%;
-margin-left: -352px;
-top:30%;
-padding-bottom:10px;
-margin-top: -165px;
--moz-border-radius-bottomright: 30px;
--webkit-border-bottom-right-radius: 30px;
-_height:100%; /* IE FIX */
+html
+{
+  height:100%;
 }
 
-
-#login form {
-width:705px;
-display:inline;
+.fa:hover
+{
+  text-decoration: underline;
 }
 
-h2{
-padding: 15px 0 15px 75px;
-_padding-left: 38px;
-margin-top: 25px;
-font-size: 45px;
-background: url(../images/h2BG3.png) no-repeat;
-color: ##2F2F2F;
-border-top: 1px solid #9F9F9F;
-text-indent: -9999px;
-width: 748px;
-height: 103px;
-position: relative;
-left: -23px;
+.login
+{
+  margin-top: 5%;
+  max-height: 340px;
+  min-height: 340px;
+  background-color: #eaeff1;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px #000;
 }
 
-label {
-font-size: 24px;
+.btn, .btn-success, .btn-warning, .btn-default
+{
+  font-size: 1.2em;
+  font-weight: 500;
 }
 
-
-small {
-font-size: 16px;
-position: relative;
-top: -4px;
+.panel
+{
+  margin: 20px;
+  background-color: transparent;
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
 }
 
-h4 {
-color: #5f5f5f;
-font-size: 23px;
+.panel-heading
+{
+  height: 90px;
+  background-image: url(../images/tinybannerw.jpg);
+  background-size: 100%;
+  background-repeat: no-repeat;
 }
 
-
-
-span.exit {
-position: absolute;
-top:0;
-right:0;
-background: #6361DF;
-color:#292929;
-font-size:10px;
-line-height: 14px;
-font-weight: bold;
-padding: .3em;
-cursor: pointer;
-border-left: 1px dotted white;
-border-bottom: 1px dotted white;
-}
-
-
-
-.form-control {
-height:54px;
-width:60%;
-font-size: 18px;
- margin:0 auto;
- float:none;
-}
-
-.btn-default {
-display:inline;
-width:20%;
-font-size: 24px;
-margin-right:auto;
-margin-left:auto;
-}
-
-input#submit {
-display:inline;
-width: 20%;
-font-size: 24px;
-margin-right:auto;
-margin-left:auto;
-}
-
-.btn-block + .btn-block {
-  margin-top: 0px;
-}
-
-.page-header {
-left: 50%;
-margin-top:5%;
-}
-
-
-hide {}
-show {}
-login	{}
-/* BOOSTRAP DEMO LOGIN
-body {
-  padding-top: 40px;
-  padding-bottom: 40px;
-  background-color: #eee;
-}
-
-.form-signin {
-  max-width: 420px;
-  padding: 15px;
-  margin: 0 auto;
-}
-.form-signin .form-signin-heading,
-.form-signin .checkbox {
-  margin-bottom: 10px;
-}
-.form-signin .checkbox {
+.alert
+{
+  width:auto;
+  margin-bottom: 0;
+  font-size: 14px;
   font-weight: normal;
+  line-height: 1.428571429;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  padding:6px 12px;
+  height: 38px;
+  display: inline-block;
 }
-.form-signin .form-control {
-  position: relative;
-  font-size: 16px;
-  height: auto;
-  padding: 10px;
-  -webkit-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-          box-sizing: border-box;
-}
-.form-signin .form-control:focus {
-  z-index: 2;
-}
-.form-signin input[type="text"] {
-  margin-bottom: -1px;
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-}
-.form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-*/
 
+a.btn:hover, a:hover
+{
+  color:#f97e13;  
+  text-decoration: none;
+}

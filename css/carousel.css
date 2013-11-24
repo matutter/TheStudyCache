@@ -60,6 +60,11 @@
         height: 300px;
       }
 
+.carousel-inner > .item > img
+{
+  height: 900px;
+}
+
 .carousel-control.left {
 background-image:none;
 }

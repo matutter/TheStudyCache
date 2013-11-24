@@ -32,8 +32,12 @@ function dv_callback(data) {
     $('.dv-user').append(data['user']);
     $('.dv-breadcrumb').append('<ol class="breadcrumb"><li><a href="#">'+ data['sbj'] + '</a></li><li><a href="#">'+ data['cls'] +'</a></li><li><a href="#">'+ data['typ'] +'</a></li><li class="active">'+ data['ttl'] +'</li></ol>');
     $('.dv-body').append(data['summary']);
-    $('.test').append('<iframe id="content" scrolling="no" class="background" background-position="center" src="../classes/'+data['path']+'"></iframe>');
-  // $('.test').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');
+    var regex = /(?:\.([^.]+))?$/;
+    var ext = regex.exec("file.txt")[1];
+    if( ext.match(/png|pdf|jpg|jpeg|txt|css|c|cpp|js|h/gi) )
+      $('.test').append('<iframe id="content" scrolling="yes" class="background" background-position="center" src="../classes/'+data['path']+'" style="background-color:white"></iframe>');
+    else
+      $('.test').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');
     $('.dv-body-slider').hide();
 
     $('.fa-chevron-down').click(function() {
