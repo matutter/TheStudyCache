@@ -171,6 +171,19 @@ cursor: pointer;
 /**********************************************************/
 /* DOC VIEW */
 
+.master {}
+.current-comments{}
+
+.now{}
+
+blockquote
+{
+	width:90%;
+	border-color: #333;
+	border-width: 5px;
+	margin-bottom: 10px; 
+}
+
 .dv-panel
 {
 	height:600px;
@@ -313,6 +326,33 @@ iframe
 /**********************************************************/
 
 
+/**********************************************************/
+/* COMMENTS */
+
+.comments
+{
+	margin: 5px;
+	padding: 5px;
+	background-color: transparent;
+	color:#333;
+	max-height: 500px;
+	overflow-y: scroll;
+}
+
+.comments > .row > strong
+{
+	font-size: 1.2em;
+	font-weight: 700;
+}
+
+.each
+{
+	padding: 5px;
+}
+
+.new-comment{}
+
+/**********************************************************/
 
 
 .footer

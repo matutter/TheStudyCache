@@ -37,24 +37,25 @@ class Ajax {
 	}
 
 	function doc_view_where_id($pid) {
-		$sql = "SELECT subject, class, type, title, username, path, date, instructor, description FROM upload WHERE id = ?";
+		$sql = "SELECT subject, class, type, title, username, path, date, instructor, description, id FROM upload WHERE id = ?";
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('s',$pid);
 			$try->execute();
 			$try->store_result();
-			$try->bind_result($row1,$row2,$row3,$row4,$row5,$row6,$row7,$row8,$row9);
+			$try->bind_result($row1,$row2,$row3,$row4,$row5,$row6,$row7,$row8,$row9,$row10);
 		}
 		if($try->fetch()) {
-			$row6 = str_replace('\\','/',$row6);
-			$row6 = str_replace(' ','%20',$row6);
+			$row6 = str_replace('\\','/',$row6); // row6 = path
+			$row6 = str_replace(' ','%20',$row6); //prepare path for api calls
 			$download = $row6;
-			//$row6 = str_replace('/','%2F',$row6);
+			//$row6 = str_replace('/','%2F',$row6); // for windows only
 			$res['sbj'] = $row1;
 			$res['cls'] = $row2;
 			$res['typ'] = $row3;
 			$res['ttl'] = $row4;
 			$res['user'] = $row5;
 			$res['path'] = $row6;
+			$res['id'] = $row10;
 			$res['summary'] = '
 
         <div class="col-md-5">

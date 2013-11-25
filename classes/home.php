@@ -1,4 +1,5 @@
 <!-- document view -->
+<?php session_start(); ?>
 <script>
 $(document).ready(function(){
 
@@ -12,20 +13,43 @@ $.ajax({
     async:true,
     url: "../classes/ajax.php",
     data: {find:pid},
-    success: function(pid){ focus(pid); }
+    success: function(pid){ focus(pid);  }
 });
 
 function focus(pid) {
   $.ajax({
       type: "POST", dataType: "json", url: "../classes/ajax.php", data: {dv:pid},
-      success: function(data){ dv_callback(data); }
+      success: function(data){ dv_callback(data); populate(pid); }
   });
 }
+
+////////////////////////////////////
+//ben + adam
+function populate(pid) {
+    $.ajax({
+    type: "POST",
+    async:true,
+    url: "../classes/comments.php",
+    data: {request:pid},
+    success: function(response){ 
+        $(response).appendTo('.current-comments');
+        $( 'blockquote:nth-of-type(even)' ).css({'margin-left':20});
+
+        var uid="<?php  echo $_SESSION['user']; ?>";
+        //if( uid == $('.dv-user').html() ) {
+          //$('#killable').append('<i class="fa fa-times"></i>');
+
+
+        //}
+
+      }
+    });
+  }
+
 function dv_callback(data) {
   name = $('.dv-title').text();
   if($('#id' + name).length==0) {
-
-    //$('div.dv-panel').css('background-image', 'url(../classes/' + data['path'] + ')');
+    $('.master').attr('id',data['id']);
     $('div.dv-panel').attr('href', '/classes/' + data['path']); 
     $('.dv-title').append(data['ttl']);
     $('.dv-title').attr('id',data['ttl']);
@@ -33,7 +57,7 @@ function dv_callback(data) {
     $('.dv-breadcrumb').append('<ol class="breadcrumb"><li><a href="#">'+ data['sbj'] + '</a></li><li><a href="#">'+ data['cls'] +'</a></li><li><a href="#">'+ data['typ'] +'</a></li><li class="active">'+ data['ttl'] +'</li></ol>');
     $('.dv-body').append(data['summary']);
     var regex = /(?:\.([^.]+))?$/;
-    var ext = regex.exec("file.txt")[1];
+    var ext = regex.exec(data['path'])[1];
     if( ext.match(/png|pdf|jpg|jpeg|txt|css|c|cpp|js|h/gi) )
       $('.test').append('<iframe id="content" scrolling="yes" class="background" background-position="center" src="../classes/'+data['path']+'" style="background-color:white"></iframe>');
     else
@@ -61,7 +85,7 @@ function dv_callback(data) {
 <!-- START LEFT ELEMENTS -->
 <div class="col-md-8">
   <div class="col-md-12">
-    <div class="panel panel-default">
+    <div class="panel panel-default master">
       <div class="dv-panel">
         <div class="dv-heading">
             <h2 class="dv-title"></h2> <cite> by <div class="dv-user"></div></cite>
@@ -80,31 +104,83 @@ function dv_callback(data) {
   </div>
 
 
-  <div class="col-md-8">
-    other tabs for interaction, download, comments, history, ect..
-  </div>
 
 </div>
 <!-- END LEFT ELEMENTS --> 
 
 
 <!-- START RIGHT ELEMENTS -->
- <div class="col-md-4">
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading">More by poster</div>
-     <div class="panel-body">
-        sub data + thumbnail
-      </div>
-    </div>
-  </div>
+<div class="col-md-4">
 
-  <div class="col-md-12">
-    <div class="panel panel-default">
-      <div class="panel-heading"> = </div>
-     <div class="panel-body">
-          + 
+<script>
+
+var uid="<?php echo $_SESSION['user']; ?>";
+lastcomment = 0;
+$(document).ready(function() {
+  var comment;
+  var pid;
+
+  $('#post').click(function(){ MakePost(); });
+  $('textarea#mycomment').on('keyup', function(e) {
+      var code = (e.keyCode ? e.keyCode : e.which);
+      if (code == 13)
+        MakePost();
+  });
+
+function MakePost() {
+    pid = $('.master').attr('id');
+    comment = $('#mycomment').val();
+    if(comment != lastcomment) {
+      comment_now = ''+
+        '<blockquote style="background-color:#0099ff;">' +
+          '<div class="row">'+
+            '<strong>'+ uid +'</strong> <cite> posted NOW </cite>' +
+              '</div>'+
+          '<div class="row">'+
+            comment +
+          '</div>'+
+        '</blockquote>'+ 
+      '</div>';
+
+      $('<div class="new" >' + comment_now + ' </div> ').appendTo('.new-comment').fadeIn(8000);
+    }
+    
+    lastcomment = comment;  
+    $('#post').addClass('disabled');
+    $('textarea#mycomment').attr("disabled", "disabled").val("comment posted...");
+    var payload = pid + "." + uid + "." + comment;
+
+    $.ajax({ type: "POST", async:true, url: "../classes/comments.php",
+     data: {new_comment:payload}, success: function(response){} });
+  }
+
+
+  $('#mycomment').click(function(){
+    $('#post').removeClass('disabled');
+  });
+});
+
+</script>
+
+  <div class="col-md-12" id="messages">
+    <div class="row">
+      <form>
+        <textarea id="mycomment" class="form-control input-large" name="post" placeholder="comments..."></textarea>
+      </form>
+        <a class="btn btn-default" id="post">Post Comment</a>
+      
+        <div class="comments">
+
+          <div class="new-comment"></div>
+
+
+
+
+          <div class="current-comments"></div>
+
+        </div> <!-- END COMMENTS -->   
+       
+
       </div>
-    </div>
   </div>
 </div>

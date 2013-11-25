@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <script>
 $('li.fa-times').click(function D() {
 	var k = $(this).attr('id');
@@ -69,7 +70,7 @@ $result = mysqli_query($con,"SELECT * FROM upload");
 while($row = mysqli_fetch_array($result))
 {
 	echo "<tr> <td>";
-	if( $row['username'] == $_COOKIE["username"])
+	if( $row['username'] == $_SESSION["user"])
 	{
 		echo $row['id'] . "</td>
 		<td> " . $row['username'] . "</td>
@@ -82,8 +83,8 @@ while($row = mysqli_fetch_array($result))
 		<td> " . $row['date']  . "</td>
 		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
 		<td> " . '<li class="fa fa-times" id="'.$row['id'].'"></li>' . "</td>
-		<td> " . '<span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+		<td> " . '<span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
 			';
 
 		get_ratings($row['id']);
@@ -103,8 +104,8 @@ while($row = mysqli_fetch_array($result))
 		<td> " . $row['date']  . "</td>
 		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
 		<td> " . ' '. "</td>
-		<td> " . '</li><span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_COOKIE["username"].'"></li>
+		<td> " . '</li><span class="badge"><li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
 			';
 
 			get_ratings($row['id']);
