@@ -33,15 +33,7 @@ function populate(pid) {
     data: {request:pid},
     success: function(response){ 
         $(response).appendTo('.current-comments');
-        $( 'blockquote:nth-of-type(even)' ).css({'margin-left':20});
-
-        var uid="<?php  echo $_SESSION['user']; ?>";
-        //if( uid == $('.dv-user').html() ) {
-          //$('#killable').append('<i class="fa fa-times"></i>');
-
-
-        //}
-
+        $( 'blockquote:nth-of-type(odd)' ).css({'margin-left':20});
       }
     });
   }
@@ -58,7 +50,7 @@ function dv_callback(data) {
     $('.dv-body').append(data['summary']);
     var regex = /(?:\.([^.]+))?$/;
     var ext = regex.exec(data['path'])[1];
-    if( ext.match(/png|pdf|jpg|jpeg|txt|css|c|cpp|js|h/gi) )
+    if( ext.match(/png|pdf|jpg|jpeg|txt|css|cpp|js|h/) )
       $('.test').append('<iframe id="content" scrolling="yes" class="background" background-position="center" src="../classes/'+data['path']+'" style="background-color:white"></iframe>');
     else
       $('.test').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');
@@ -157,6 +149,18 @@ function MakePost() {
 
   $('#mycomment').click(function(){
     $('#post').removeClass('disabled');
+  });
+
+  //since these icos were added by a post processor we have to use a delegated function to find it
+  $('.row').on('click', '#remove',function(){
+    var cid = $(this).attr('cid');
+    $(this).parent().parent().fadeOut();
+    $.ajax({ type: "POST", async:true, url: "../classes/comments.php", data: {remove:cid},
+      success: function(response){
+        if(response!="ok")
+          alert("Something went wrong!");
+      }
+    });
   });
 });
 
