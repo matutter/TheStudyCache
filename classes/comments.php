@@ -69,7 +69,7 @@ class Comments
 			<blockquote cid = "'.$row["id"].'" pid = "'.$row["pid"].'" uid = "'.$row['uid'].'" >
 	            <div class="row">';
 
-	            if( $row['uid'] == $_SESSION['user'] )
+	            if( $row['uid'] == $_SESSION['user'] || $_SESSION['user'] == $_POST['by'])
 	              $all_comments = $all_comments . '<i id="remove" cid="'.$row["id"].'" class="fa fa-times"></i> ';
 
 	         $all_comments = $all_comments . '<strong>' . $row["uid"] . '</strong><cite> at '. $row["time"] .' </cite>

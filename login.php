@@ -31,7 +31,9 @@ if(isset($_GET['status']) && $_GET['status'] == 'loggedout') {
 
   <div class="col-md-4 col-md-offset-4">
     <div class="panel panel-default" id="login">
-      <div class="panel-heading"></div>
+      <div class="panel-heading">
+        <img class="img-responsive" src="../images/tinybannerw.jpg">
+      </div>
 
       <div class="panel-body">
         <form id="login" role="form">

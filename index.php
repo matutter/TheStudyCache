@@ -5,7 +5,6 @@ $membership->confirm();
 ?>
 
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN""http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -54,9 +53,9 @@ $membership->confirm();
             <!-- last 3/3 -->
             <div class="col-md-4">
                 <div class="input-group search">
-                    <input type="text" class="form-control">
+                    <input id="search" type="text" class="form-control search">
                     <div class="input-group-btn">
-                        <button class="btn btn-primary"><div class="fa fa-search"></div> Search</button>
+                        <button id="search" class="btn btn-primary"><div class="fa fa-search"></div> Search</button>
                         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" tabindex="-1">
                             <span class="fa fa-toggle-down search-span"></span>
                             <span class="sr-only">Toggle Dropdown</span>
@@ -98,3 +97,20 @@ $membership->confirm();
 
 </body>
 </html>
+
+<script>
+
+
+$(document).ready(function() {
+    $('button#search').click(function(){ find(); });
+    $('input#search').on('keyup', function(e) {
+        var code = (e.keyCode ? e.keyCode : e.which);
+        if (code == 13)
+            find();
+    });
+    function find(){
+        search = $('input#search').val();
+        window.location.hash = "b." + search;
+    }
+});
+</script>

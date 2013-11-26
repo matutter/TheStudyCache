@@ -9,6 +9,28 @@ $(document).ready(function(){
 
 		var hash = window.location.hash;
 		var res = hash.match(/[a-zA-Z]/g);
+
+function locationHashChanged() {
+    var hash = window.location.hash;
+    var res = hash.match(/[a-zA-Z]/g);
+    if(res=='h') {
+      $('li.home').addClass('active').removeClass('disable');
+            $('li.home').siblings().removeClass('active').addClass('disable');
+              $('div.home').load('../classes/home.php').show().siblings().hide();
+	}
+    var regex = new RegExp("b.");
+    var ext = regex.exec(hash)[0];
+	if(ext=='b.') {
+      $('li.browse').addClass('active').removeClass('disable');
+            $('li.browse').siblings().removeClass('active').addClass('disable');
+              $('div.browse').load('../classes/search.php',function(){
+              	//$('#default').toggle();
+              }).show().siblings().hide();
+              
+	}
+}
+window.onhashchange = locationHashChanged;
+
 /* //alternative router
 	function locationHashChanged() {
 		var hash = window.location.hash;

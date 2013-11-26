@@ -18,6 +18,7 @@ $('li.fa-thumbs-down').click(function down() {
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(){}});
 });
 
+$(document).ready(function(){
 function locationHashChanged() {
     var hash = window.location.hash;
     var res = hash.match(/[a-zA-Z]/g);
@@ -26,8 +27,21 @@ function locationHashChanged() {
             $('li.home').siblings().removeClass('active').addClass('disable');
               $('div.home').load('../classes/home.php').show().siblings().hide();
 	}
+    var regex = new RegExp("b.");
+    var ext = regex.exec(hash)[0];
+	if(ext=='b.') {
+      $('li.browse').addClass('active').removeClass('disable');
+            $('li.browse').siblings().removeClass('active').addClass('disable');
+              $('div.browse').load('../classes/search.php',function(){
+              	//$('#default').toggle();
+              }).show().siblings().hide();
+              
+	}
 }
 window.onhashchange = locationHashChanged;
+
+});
+
 </script>
 
 
@@ -48,7 +62,7 @@ window.onhashchange = locationHashChanged;
 
 	</thead>
 	<tbody>
-
+	<div id="default">
 <?php
 require_once 'includes.php';
 
@@ -120,5 +134,6 @@ mysqli_close($con);
 
 
 ?>
+</div>
 	</tbody>
 </table>

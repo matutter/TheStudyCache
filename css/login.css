@@ -50,6 +50,9 @@ html
 
 .panel
 {
+  min-width: 300px;
+  max-width: 562px;
+  padding: 0px;
   margin: 20px;
   background-color: transparent;
   box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
@@ -57,10 +60,12 @@ html
 
 .panel-heading
 {
-  height: 90px;
-  background-image: url(../images/tinybannerw.jpg);
-  background-size: 100%;
-  background-repeat: no-repeat;
+  padding: 0px;
+}
+img
+{
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
 .alert

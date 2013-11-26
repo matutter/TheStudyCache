@@ -110,7 +110,9 @@ margin-bottom: 3px;
 background-color:rgba(255,255,255,.7);
 color: #000;
 height: 80%;
+
 }
+
 
 .top-right
 {
@@ -173,7 +175,7 @@ cursor: pointer;
 
 .master {}
 .current-comments{}
-
+.results{}
 .now{}
 
 blockquote
