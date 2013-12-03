@@ -103,10 +103,11 @@ function get_ratings($pid){
 
 		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
 			die('Cannot connect.err0x00');
-		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid." LIMIT 30");
+		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid." LIMIT 1");
 		while($row = mysqli_fetch_array($sql))
 		{
-			echo '<div id="rating-' . $pid . '" >'. ($row['up'] - $row['down']) . '</div>';
+			$value = $row['up'] - $row['down'];
+			echo '<div id="rating-' . $pid . '" >'. $value . '</div>';
 		}
 }
 

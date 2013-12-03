@@ -54,7 +54,7 @@ if(isset($_GET['status']) && $_GET['status'] == 'loggedout') {
   <div class="col-md-4 col-md-offset-4" id="register">
     <div class="panel panel-default">
       <div class="panel-heading"></div>
-
+         <img class="img-responsive" src="../images/tinybannerw.jpg">
       <div class="panel-body">
         <form id="register" role="form">
           <div class="form-group">
