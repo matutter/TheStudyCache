@@ -7,7 +7,7 @@ $upload = new UPLOAD;
 if($_POST && $_FILES["file"]["error"] == 0 && !empty($_POST['title']) && !empty($_POST['subject']) && !empty($_POST['type']) && !empty($_POST['instructor']) && !empty($_POST['class']) && !empty($_POST['description']))
 {
 	session_start();
-	$target = "uploads\\" . rand(0, 5000) .$_FILES['file']['name'];
+	$target = "uploads/" . rand(0, 5000) .$_FILES['file']['name'];
 	$upload -> do_upload(
 				$_POST['title'], $_POST['subject'],
 				$_POST['type'], $_POST['instructor'],
