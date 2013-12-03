@@ -3,7 +3,7 @@ require_once 'uploader.php';
 
 ?>
 
-<script>	
+<script type="text/javascript">	
 	$('input.form-control').attr('maxlength',35);
 </script>
 

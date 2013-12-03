@@ -40,7 +40,7 @@ $(document).ready(function() {
 		    success: function(response){
 		    	if( response['bool'] == "true" ) {
 		    		$('.alert').hide();
-		    		$('<div class="alert alert-success">'+response['message']+'</div>').clone().appendTo('span#login-response').fadeOut(8000).siblings().hide();
+		    		
 		    		switch_these();
 		    		$('#register,#show-reg-form').addClass('disabled')
 		    	}

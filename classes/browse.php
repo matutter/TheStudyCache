@@ -1,5 +1,5 @@
 <?php session_start(); ?>
-<script>
+<script type="text/javascript">
 
 $(document).ready(function(){
 

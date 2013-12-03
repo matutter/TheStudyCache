@@ -1,6 +1,6 @@
 <!-- document view -->
 <?php session_start(); ?>
-<script>
+<script type="text/javascript">
 $(document).ready(function(){
 
 if(window.location.hash && window.location.hash.match(/\d+/g) != null)
@@ -105,7 +105,7 @@ function dv_callback(data) {
 <!-- START RIGHT ELEMENTS -->
 <div class="col-md-4">
 
-<script>
+<script type="text/javascript">
 
 var uid="<?php echo $_SESSION['user']; ?>";
 lastcomment = 0;
