@@ -9,13 +9,13 @@ if($_POST && isset($_POST['d'])) {
 
 if($_POST && isset($_POST['up'])) {
 	$op = new Ajax;
-	$response = $op->up($_POST['up'], $_POST['by']);
+	$response = $op->up($_POST['up']);
 	echo $op->get_ratings($_POST['up']);
 }
 
 if($_POST && isset($_POST['down'])) {
 	$op = new Ajax;
-	$response = $op->down($_POST['down'], $_POST['by']);
+	$response = $op->down($_POST['down']);
 	echo $op->get_ratings($_POST['down']);
 }
 
@@ -124,74 +124,27 @@ class Ajax {
 	}//END FUNCTION
 
 
-	function up($pid, $uid) {
-		$sql = "SELECT uidUP FROM rating WHERE pid = ? limit 1";
+	function up($pid) {
+		$sql = "UPDATE rating SET up = up + 1 WHERE pid = ?";
+		if($try = $this->con->prepare($sql)) {
+			$try->bind_param('s',$pid);
+			if ( $try->execute() )
+				return true;
+			else 
+				return false;
+		}			
+	} //END func
+
+	function down($pid) {
+		$sql = "UPDATE rating SET down = down + 1 WHERE pid = ?";
 
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('s',$pid);
-			$try->execute();
-			$try->bind_result($user_ary);
-
-			if($try->fetch()) { 
-				$look_for = "/.".$uid."./i";
-
-				if (!preg_match($look_for, $user_ary))
-				{
-				    //echo "A match was not found.";
-				    $try->close();
-					//////////////////////////////////////////////////////////////
-					$sql = "UPDATE rating SET
-					up = up + 1,
-					uidUP = REPLACE(uidUP, ?, '.' ),
-					uidUP = concat(uidUP, ? ),
-					uidDOWN = REPLACE(uidDOWN, ?, '.' )
-					WHERE pid = ?";
-
-					$skew = ".".$uid.".";
-					$uid = $uid.".";
-					if($try = $this->con->prepare($sql)) {
-						$try->bind_param('ssss',$skew,$uid,$skew,$pid);
-						$try->execute();
-					}
-					//////////////////////////////////////////////////////////////
-				} //END SECOND CON
-			} // END FETCH DATA TRY <- security :D
-		} // END INITIAL CON
-	} // end
-
-	function down($pid, $uid) {
-		$sql = "SELECT uidDOWN FROM rating WHERE pid = ? limit 1";
-
-		if($try = $this->con->prepare($sql)) {
-			$try->bind_param('s',$pid);
-			$try->execute();
-			$try->bind_result($user_ary);
-
-			if($try->fetch()) { 
-				$look_for = "/.".$uid."./i";
-
-				if (!preg_match($look_for, $user_ary))
-				{
-				    //echo "A match was not found.";
-				    $try->close();
-					//////////////////////////////////////////////////////////////
-					$sql = "UPDATE rating SET
-					down = down + 1,
-					uidDOWN = REPLACE(uidDOWN, ?, '.' ),
-					uidDOWN = concat(uidDOWN, ? ),
-					uidUP = REPLACE(uidUP, ?, '.' )
-					WHERE pid = ?";
-
-					$skew = ".".$uid.".";
-					$uid = $uid.".";
-					if($try = $this->con->prepare($sql)) {
-						$try->bind_param('ssss',$skew,$uid,$skew,$pid);
-						$try->execute();
-					}
-					//////////////////////////////////////////////////////////////
-				} //END SECOND CON
-			} // END FETCH DATA TRY <- security :D
-		} // END INITIAL CON
+			if ( $try->execute() )
+				return true;
+			else 
+				return false;
+		}
 	} // END FUNCTION
 
 

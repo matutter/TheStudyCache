@@ -4,38 +4,13 @@
 $(document).ready(function(){
 
 
-/*
-  //since these icos were added by a post processor we have to use a delegated function to find it
-  $('.row').on('click', '#remove',function(){
-    var cid = $(this).attr('cid');
-    $(this).parent().parent().fadeOut();
-    $.ajax({ type: "POST", async:true, url: "../classes/comments.php", data: {remove:cid},
-      success: function(response){
-        if(response!="ok")
-          alert("Err:C-0-0-0");
-      }
-    });
-  });
-
-/////////////// works with browse click not search for deletes
-$('li.fa-times').click(function D() {
+$('table').on('click', '#remove',function() {
 	var k = $(this).attr('pid'); 
-	alert("you click it "+k);
-	//$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){}});
-	$(this).parents('tr').fadeOut();
-});
-
-*/
-
-
-$('table').on('click', '#remove',function d() {
-	var k = $(this).attr('pid'); 
-	//alert("you click " + k);
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){ }});
 	$(this).parents('tr').fadeOut();
 });
 
-$('li.fa-thumbs-up').click(function up() {
+$('table').on('click', '#up',function() {
 	var pid = $(this).attr('pid');
 	var uid = $(this).attr('uid');
 	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid, by:uid}, success: function(res){
@@ -43,10 +18,9 @@ $('li.fa-thumbs-up').click(function up() {
 	}});
 });
 
-$('li.fa-thumbs-down').click(function down() {
+$('table').on('click', '#down',function() {
 	var pid = $(this).attr('pid');
-	var uid = $(this).attr('uid');
-	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(res){
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid}, success: function(res){
 		$('#rating-'+pid).replaceWith('<div id="rating-'+pid+'">'+res+'</div>');
 	}});
 });
@@ -135,8 +109,8 @@ while($row = mysqli_fetch_array($result))
 
 				get_ratings($row['id']);
 
-		echo '<li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+		echo '<li class="fa  fa-thumbs-up" id="up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+			<li class="fa  fa-thumbs-down" id="down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
 			</span>';
 
 		
@@ -161,8 +135,8 @@ while($row = mysqli_fetch_array($result))
 
 get_ratings($row['id']);
 
-		echo '<li class="fa  fa-thumbs-up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			<li class="fa  fa-thumbs-down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+		echo '<li class="fa  fa-thumbs-up" id="up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+			<li class="fa  fa-thumbs-down" id="down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
 			</span>';
 
 			
