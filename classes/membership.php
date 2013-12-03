@@ -65,6 +65,7 @@ class MEMBERSHIP {
 		session_start();
 		$_SESSION['status'] = 'auth';
 		$_SESSION['user']	= $un;
+		
 		return true; 
 		} else return false;
 	}
@@ -84,7 +85,7 @@ class MEMBERSHIP {
 	function log_User_Out() {
 		if(isset($_SESSION['status'])) {
 			unset($_SESSION['status']);
-			unset($_SESSION['username']);
+			unset($_SESSION['user']);
 			
 			if(isset($_COOKIE[session_name()])) 
 				setcookie(session_name(), '', time() - 1000);

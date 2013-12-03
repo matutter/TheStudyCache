@@ -17,6 +17,31 @@ $(document).ready(function(){
 		var hash = window.location.hash;
 		var res = hash.match(/[a-zA-Z]/g);
 
+
+$('table.table-striped').on('click', '#remove',function d() {
+	var k = $(this).attr('pid'); 
+	//alert("you click " + k);
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {d:k}, success: function(){}});
+	$(this).parents('tr').fadeOut();
+});
+
+$('table.table-striped').on('click', '#up',function up() {
+	var pid = $(this).attr('pid');
+	var uid = $(this).attr('uid');
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid, by:uid}, success: function(res){
+		$('#rating-'+pid).replaceWith('<div id="rating-'+pid+'">'+res+'</div>');
+		//alert(pid);
+	}});
+});
+
+$('table.table-striped').on('click', '#down',function down() {
+	var pid = $(this).attr('pid');
+	var uid = $(this).attr('uid');
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid, by:uid}, success: function(res){
+		$('#rating-'+pid).replaceWith('<div id="rating-'+pid+'">'+res+'</div>');
+	}});
+});
+
 function locationHashChanged() {
     var hash = window.location.hash;
     var res = hash.match(/[a-zA-Z]/g);
@@ -66,8 +91,7 @@ window.onhashchange = locationHashChanged;
 	<tbody>
 		
 
-		<div class="results"> </div>
-
+		
 
 	</tbody>
 </table>

@@ -1,3 +1,30 @@
+
+$(window).bind('beforeunload',function(){
+
+//	return " "; prompts on reload
+});
+$(window).load(function () {
+	//window.location.hash = "#"; // resets the hash to nothing
+	    var hash = window.location.hash;
+    var res = hash.match(/[a-zA-Z]/g);
+    /*if(res=='h') {
+      $('li.home').addClass('active').removeClass('disable');
+            $('li.home').siblings().removeClass('active').addClass('disable');
+              $('div.home').load('../classes/home.php').show().siblings().hide();
+	}*/
+    var regex = new RegExp("b.");
+    var ext = regex.exec(hash)[0];
+	if(ext=='b.') {
+      $('li.browse').addClass('active').removeClass('disable');
+            $('li.browse').siblings().removeClass('active').addClass('disable');
+              $('div.browse').load('../classes/search.php',function(){
+              	//$('#default').toggle();
+              }).show().siblings().hide();
+              
+	}
+});
+
+
 $(document).ready(function(){
 	//initial  states
 	$('div.home').load('../classes/home.php');

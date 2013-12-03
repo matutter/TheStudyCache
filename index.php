@@ -30,8 +30,8 @@ $membership->confirm();
     <div class="row">
 
         <div class="navbar-right">
-            Hello <?php echo $_SESSION['user']; ?>!
-            <a type="button" class="btn" href="#debug"> Debug </a> <a type="button" class="btn btn-default" href="login.php?status=loggedout"><i class="fa fa-sign-out">Logout</i></a>
+            
+            <a type="button" class="btn" href="#"> Hello <?php echo $_SESSION['user']; ?>! </a> <a type="button" class="btn btn-default" href="login.php?status=loggedout"><i class="fa fa-sign-out">Logout</i></a>
         </div>
     </div>
     <div class="panel panel-default">
@@ -44,8 +44,8 @@ $membership->confirm();
             <div class="col-md-6">
                 <ul class="nav nav-tabs">
                     <li class="home active"><a href="#">Home</a></li>
-                    <li class="profile disable"><a href="#">Profile</a></li>
-                    <li class="workbook disable"><a href="#">WorkBook</a></li>
+                   <!-- <li class="profile disable"><a href="#">Profile</a></li>
+                    <li class="workbook disable"><a href="#">WorkBook</a></li> -->
                     <li class="upload disable"><a href="#">Upload</a></li>
                     <li class="browse disable"><a href="#">Browse</a></li>                    
                 </ul>
@@ -76,9 +76,9 @@ $membership->confirm();
 
         <div class="home"></div>
 
-        <div class="profile"></div>
+       <!-- <div class="profile"></div>
 
-        <div class="workbook"></div>
+        <div class="workbook"></div> -->
 
         <div class="upload"> </div>
 

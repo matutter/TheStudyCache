@@ -1,20 +1,22 @@
 <?php
 require_once 'includes.php';
-
+session_start();
 if($_POST && isset($_POST['d'])) {
 	$op = new Ajax;
-	$response = $op->delete_path_where_id($_POST['d'], $_COOKIE["username"]);
-	$response = $op->drop_upload($_POST['d'], $_COOKIE["username"]);
+	$response = $op->delete_path_where_id($_POST['d'], $_SESSION["user"]);
+	$response = $op->drop_upload($_POST['d'], $_SESSION["user"]);
 }
 
 if($_POST && isset($_POST['up'])) {
 	$op = new Ajax;
 	$response = $op->up($_POST['up'], $_POST['by']);
+	echo $op->get_ratings($_POST['up']);
 }
 
 if($_POST && isset($_POST['down'])) {
 	$op = new Ajax;
 	$response = $op->down($_POST['down'], $_POST['by']);
+	echo $op->get_ratings($_POST['down']);
 }
 
 if($_POST && isset($_POST['dv'])) {
@@ -99,7 +101,7 @@ class Ajax {
 	
 
 	function delete_path_where_id($id,$un) {
-		$sql = "SELECT * FROM upload WHERE id = ? AND username = ?";
+		$sql = "SELECT path FROM upload WHERE id = ? AND username = ?";
 
 		if($try = $this->con->prepare($sql)) {
 			$try->bind_param('ss',$id,$un);
@@ -191,6 +193,18 @@ class Ajax {
 			} // END FETCH DATA TRY <- security :D
 		} // END INITIAL CON
 	} // END FUNCTION
+
+
+	function get_ratings($pid){
+
+		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
+			die('Cannot connect.err0x00');
+		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid." LIMIT 1");
+		while($row = mysqli_fetch_array($sql))
+		{
+			return ($row['up'] - $row['down']);
+		}
+}
 
 }//END CLASS
 ?>
