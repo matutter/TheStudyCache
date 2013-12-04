@@ -13,15 +13,18 @@ $.ajax({
     async:true,
     url: "../classes/ajax.php",
     data: {find:pid},
-    success: function(pid){ focus(pid);  }
+    success: function(pid){ focus(pid); get_rating(pid); }
 });
 
 function focus(pid) {
   $.ajax({
       type: "POST", dataType: "json", url: "../classes/ajax.php", data: {dv:pid},
-      success: function(data){ dv_callback(data); populate(pid); }
+      success: function(data){ dv_callback(data); populate(pid);  }
   });
 }
+
+
+
 
 ////////////////////////////////////
 //ben + adam
@@ -37,8 +40,8 @@ function populate(pid) {
         $( 'blockquote:nth-of-type(odd)' ).css({'margin-left':20});
       }
     });
-  }
-
+}
+/////////////////////////////////
 function dv_callback(data) {
   name = $('.dv-title').text();
   if($('#id' + name).length==0) {
@@ -57,20 +60,48 @@ function dv_callback(data) {
       $('.embedded').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');
     $('.dv-body-slider').hide();
 
+    $('.dv-rating').append('<div class="col-md-6"></div>'+
+        '<div class="col-md-3">'+
+          '<div class="rating-top"  > RATE </div>'+
+            '<div class="thumbs">'+
+              '<li class="fa fa-thumbs-up" pid="'+data['id']+'" id="up"></li> '+
+              '<li class="fa fa-thumbs-down" pid="'+data['id']+'" id="down"></li>'+
+        
+            '</div>'+
+        '</div><div class="col-md-3"> <h2 id="rating-'+data['id']+'"></h2> </div>');
+
+
+
     $('.fa-chevron-down').click(function() {
       $('.dv-heading').animate({opacity:0,width:"50%"},'fast');
+      $('.dv-heading-right').hide();
       $('.dv-body').fadeToggle('fast',function() {
         $('.dv-body-slider').fadeToggle('fast');   
       });
     });
     $('.fa-chevron-up').click(function() {
-      $('.dv-heading').animate({opacity:100,width:"100%"},'fast');
+      $('.dv-heading').animate({opacity:100,width:"66.66666666666666%"},'fast');
+      $('.dv-heading-right').show();
       $('.dv-body-slider').fadeToggle('fast',function(){
         $('.dv-body').fadeToggle('fast');
       });
     });
   } // end if 
+  get_rating(data['id']);
 } // end callback
+
+function get_rating(pid) {
+    $.ajax({
+      type: "POST",
+      async:true,
+      url: "../classes/ajax.php",
+      data: {rating:pid},
+      success: function(res){ 
+        $('#rating-'+pid).replaceWith('<div id="rating-'+pid+'"><h2>'+res+'</h2></div>'); 
+      }
+    });
+}
+
 }); // end function
 
 </script>
@@ -80,16 +111,23 @@ function dv_callback(data) {
   <div class="col-md-12">
     <div class="panel panel-default master">
       <div class="dv-panel">
-        <div class="dv-heading">
-            <h2 class="dv-title"></h2> <cite> by <div class="dv-user"></div></cite>
-            <div class="dv-breadcrumb"></div>
+        <div class="">
+            <div class="col-md-8 dv-heading">
+              <h2 class="dv-title"></h2> <cite> by <div class="dv-user"></div></cite>
+              <div class="dv-breadcrumb"></div>
+            </div>
+            <div class="col-md-4 dv-heading-right">
+              <div class="dv-rating"></div>
+            </div>
+              
         </div>
         
           <div class="embedded"> </div>
         
 
       </div>
-      <div class="panel-body dv-body"> <i class="fa fa-chevron-down"></i>
+
+      <div class="panel-body dv-body">  <i class="fa fa-chevron-down"></i>
       </div>
       <div class="panel-body dv-body-slider"> <i class="fa fa-chevron-up"></i>
       </div>
@@ -163,6 +201,19 @@ function MakePost() {
       }
     });
   });
+  $('.dv-rating').on('click', '#up',function() {
+  var pid = $(this).attr('pid');
+  $.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid}, success: function(res){
+    $('#rating-'+pid).replaceWith('<h2 id="rating-'+pid+'">'+res+'</h2>'); 
+  }});
+});
+
+$('.dv-rating').on('click', '#down',function() {
+  var pid = $(this).attr('pid');
+  $.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {down:pid}, success: function(res){
+    $('#rating-'+pid).replaceWith('<h2 id="rating-'+pid+'">'+res+'</h2>');
+  }});
+});
 });
 
 </script>

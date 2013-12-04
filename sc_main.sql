@@ -44,13 +44,11 @@ CREATE TABLE IF NOT EXISTS `comments` (
 --
 
 CREATE TABLE IF NOT EXISTS `rating` (
-  `uid` varchar(40) NOT NULL,
   `pid` int(11) NOT NULL,
-  `up` int(11) NOT NULL DEFAULT '1',
-  `down` int(11) NOT NULL DEFAULT '1',
-  `uidUP` longtext,
-  `uidDOWN` longtext,
-  UNIQUE KEY `pid` (`pid`)
+  `composit_id` varchar(50) NOT NULL,
+  `score` int(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`pid`),
+  UNIQUE KEY `composit_id` (`composit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

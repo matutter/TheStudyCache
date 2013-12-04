@@ -9,14 +9,20 @@ if($_POST && isset($_POST['d'])) {
 
 if($_POST && isset($_POST['up'])) {
 	$op = new Ajax;
-	$response = $op->up($_POST['up']);
+	$response = $op->up($_POST['up'],$_SESSION['user']);
 	echo $op->get_ratings($_POST['up']);
+	//if($response) echo "ok"; else echo "no insert";
 }
 
 if($_POST && isset($_POST['down'])) {
 	$op = new Ajax;
-	$response = $op->down($_POST['down']);
+	$response = $op->down($_POST['down'],$_SESSION['user']);
 	echo $op->get_ratings($_POST['down']);
+}
+
+if($_POST && isset($_POST['rating'])) {
+	$op = new Ajax;
+	echo $op->get_ratings($_POST['rating']);
 }
 
 if($_POST && isset($_POST['dv'])) {
@@ -124,10 +130,12 @@ class Ajax {
 	}//END FUNCTION
 
 
-	function up($pid) {
-		$sql = "UPDATE rating SET up = up + 1 WHERE pid = ?";
+	function up($pid, $uid) {
+		$sql = "INSERT INTO rating (pid, composit_id, score) VALUES (? , ?, -1) ON DUPLICATE KEY UPDATE score = 1";
+
+		$composit = $pid.".".$uid;
 		if($try = $this->con->prepare($sql)) {
-			$try->bind_param('s',$pid);
+			$try->bind_param('ss', $pid, $composit );
 			if ( $try->execute() )
 				return true;
 			else 
@@ -135,29 +143,33 @@ class Ajax {
 		}			
 	} //END func
 
-	function down($pid) {
-		$sql = "UPDATE rating SET down = down + 1 WHERE pid = ?";
+	function down($pid, $uid) {
+		$sql = "INSERT INTO rating (pid, composit_id, score) VALUES (? , ?, -1) ON DUPLICATE KEY UPDATE score = -1";
 
+		$composit = $pid.".".$uid;
 		if($try = $this->con->prepare($sql)) {
-			$try->bind_param('s',$pid);
+			$try->bind_param('ss', $pid, $composit );
 			if ( $try->execute() )
 				return true;
 			else 
 				return false;
-		}
-	} // END FUNCTION
+		}			
+	} //END func
 
 
 	function get_ratings($pid){
 
+		$score = 0;
 		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
 			die('Cannot connect.err0x00');
-		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid." LIMIT 1");
+
+		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid);
 		while($row = mysqli_fetch_array($sql))
 		{
-			return ($row['up'] - $row['down']);
+			$score = $score + $row['score'];
 		}
-}
+	return '<div id="rating-'.$pid.'">' . $score . '</div>';
+	}
 
 }//END CLASS
 ?>

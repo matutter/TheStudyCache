@@ -19,19 +19,19 @@ require_once 'uploader.php';
 		
 		<div class="input-group input-group-lg">
 			<span class="input-group-addon">Title</span>
-			<input type="text" class="form-control" name="title" value="test">
+			<input type="text" class="form-control" name="title" value="none">
 		</div>
 		<div class="input-group input-group-lg">
 			<span class="input-group-addon">Subject</span>
-			<input type="text" class="form-control" name="subject"value="test">
+			<input type="text" class="form-control" name="subject"value="none">
 		</div>
 		<div class="input-group input-group-lg">
 			<span class="input-group-addon">Type</span>
-			<input type="text" class="form-control" name="type"value="test">
+			<input type="text" class="form-control" name="type"value="none">
 		</div>
 		<div class="input-group input-group-lg">
 			<span class="input-group-addon">Instructor</span>
-			<input type="text" class="form-control" name="instructor"value="test">
+			<input type="text" class="form-control" name="instructor"value="none">
 		</div>
 		<div class="input-group input-group-lg">
 			<div class="input-group-btn">
@@ -42,7 +42,7 @@ require_once 'uploader.php';
 					<li><a href="#">3</a></li>
 				</ul>
 			</div><!-- /btn-group -->
-		<input type="text" class="form-control" name="class"value="test">
+		<input type="text" class="form-control" name="class"value="none">
 		</div><!-- /input-group -->
 
 			<textarea id="discription" class="form-control input-large" name="description" placeholder="Discription"></textarea>

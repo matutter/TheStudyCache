@@ -12,8 +12,7 @@ $('table').on('click', '#remove',function() {
 
 $('table').on('click', '#up',function() {
 	var pid = $(this).attr('pid');
-	var uid = $(this).attr('uid');
-	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid, by:uid}, success: function(res){
+	$.ajax({type:"POST",async:true,url:"../classes/ajax.php",data: {up:pid}, success: function(res){
 		$('#rating-'+pid).replaceWith('<div id="rating-'+pid+'">'+res+'</div>');
 	}});
 });
@@ -73,16 +72,19 @@ window.onhashchange = locationHashChanged;
 <?php
 require_once 'includes.php';
 
+
 function get_ratings($pid){
 
-		$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
-			die('Cannot connect.err0x00');
-		$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid." LIMIT 1");
-		while($row = mysqli_fetch_array($sql))
-		{
-			$value = $row['up'] - $row['down'];
-			echo '<div id="rating-' . $pid . '" >'. $value . '</div>';
-		}
+	$score = 0;
+	$con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or 
+		die('Cannot connect.err0x00');
+
+	$sql = mysqli_query($con, "SELECT * FROM rating WHERE pid = ".$pid);
+	while($row = mysqli_fetch_array($sql))
+	{
+		$score = $score + $row['score'];
+	}
+	return '<div id="rating-'.$pid.'">' . $score . '</div>';
 }
 
 $con = new mysqli(DB,DB_USER,DB_PASS,DB_NAME) or
@@ -91,60 +93,29 @@ $result = mysqli_query($con,"SELECT * FROM upload");
 
 while($row = mysqli_fetch_array($result))
 {
-	echo "<tr> <td>";
+	echo	"<tr> <td>" . $row['id'] . "</td>
+				<td> " . $row['username'] . "</td>
+				<td> " . $row['title'] . "</td>
+				<td> " . $row['subject'] . "</td>
+				<td> " . $row['type']  . "</td>
+				<td> " . $row['instructor'] . "</td>
+				<td> " . $row['class'] . "</td>
+				<td> " . $row['description'] . "</td>
+				<td> " . $row['date']  . "</td>
+				<td><a href='#h".$row['id']."'>Link</a> " . "</td>";
+	//for owners to delete
 	if( $row['username'] == $_SESSION["user"])
-	{
-		echo $row['id'] . "</td>
-		<td> " . $row['username'] . "</td>
-		<td> " . $row['title'] . "</td>
-		<td> " . $row['subject'] . "</td>
-		<td> " . $row['type']  . "</td>
-		<td> " . $row['instructor'] . "</td>
-		<td> " . $row['class'] . "</td>
-		<td> " . $row['description'] . "</td>
-		<td> " . $row['date']  . "</td>
-		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
-		<td> " . '<li class="fa fa-times" pid="'.$row['id']. '" id="remove"></li>' . "</td>
-		<td> " . '<span class="badge">';
-
-				get_ratings($row['id']);
-
-		echo '<li class="fa  fa-thumbs-up" id="up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			<li class="fa  fa-thumbs-down" id="down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			</span>';
-
-		
-
-		
-	}
+		echo "<td> " . '<li class="fa fa-times" pid="'.$row['id']. '" id="remove"></li>' . "</td>";
 	else
-	{
-		echo $row['id'] . "</td>
-		<td> " . $row['username'] . "</td>
-		<td> " . $row['title'] . "</td>
-		<td> " . $row['subject'] . "</td>
-		<td> " . $row['type']  . "</td>
-		<td> " . $row['instructor'] . "</td>
-		<td> " . $row['class'] . "</td>
-		<td> " . $row['description'] . "</td>
-		<td> " . $row['date']  . "</td>
-		<td><a href='#h".$row['id']."'>Link</a> " . "</td>
-		<td> " . ' '. "</td>
-		<td> " . '</li><span class="badge">';
+		echo "<td></td>";
 
-
-get_ratings($row['id']);
-
-		echo '<li class="fa  fa-thumbs-up" id="up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			<li class="fa  fa-thumbs-down" id="down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
-			</span>';
-
-			
-
-
-	}
-	echo "</td></tr>";
-	}
+	echo 	'<td> <span class="badge">
+				'. get_ratings($row['id']) .' 
+				<li class="fa  fa-thumbs-up" id="up" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+				<li class="fa  fa-thumbs-down" id="down" pid="'.$row['id'].'" uid="'.$_SESSION["user"].'"></li>
+				</span>
+			</td></tr>';
+}
 
 mysqli_close($con);
 
