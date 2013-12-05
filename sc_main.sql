@@ -72,20 +72,6 @@ CREATE TABLE IF NOT EXISTS `upload` (
   UNIQUE KEY `path` (`path`,`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
---
--- Triggers `upload`
---
-DROP TRIGGER IF EXISTS `copy_pid`;
-DELIMITER //
-CREATE TRIGGER `copy_pid` AFTER INSERT ON `upload`
- FOR EACH ROW BEGIN
-
-INSERT INTO sc_main.rating (uid, pid, uidUP, uidDOWN) VALUES (NEW.username, NEW.id, ".", ".");
-
-END
-//
-DELIMITER ;
-
 -- --------------------------------------------------------
 
 --
