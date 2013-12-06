@@ -22,6 +22,7 @@ SET time_zone = "+00:00";
 CREATE DATABASE IF NOT EXISTS `sc_main` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
 USE `sc_main`;
 
+
 -- --------------------------------------------------------
 
 --
@@ -35,7 +36,7 @@ CREATE TABLE IF NOT EXISTS `comments` (
   `comment` text NOT NULL,
   `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=75 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=78 ;
 
 -- --------------------------------------------------------
 
@@ -50,6 +51,13 @@ CREATE TABLE IF NOT EXISTS `rating` (
   PRIMARY KEY (`pid`),
   UNIQUE KEY `composit_id` (`composit_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `rating`
+--
+
+INSERT INTO `rating` (`pid`, `composit_id`, `score`) VALUES
+(0, '0.System', 1);
 
 -- --------------------------------------------------------
 
@@ -70,7 +78,14 @@ CREATE TABLE IF NOT EXISTS `upload` (
   `username` varchar(40) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `path` (`path`,`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=64 ;
+
+--
+-- Dumping data for table `upload`
+--
+
+INSERT INTO `upload` (`title`, `subject`, `type`, `instructor`, `class`, `description`, `path`, `id`, `date`, `username`) VALUES
+('TheStudyCache', 'Subject', 'Type', 'Instructor', 'Class', 'Description', 'uploads/TheStudyCache010.pdf', 0, '2013-12-04', 'System');
 
 -- --------------------------------------------------------
 
@@ -85,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(30) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`username`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=167 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=173 ;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

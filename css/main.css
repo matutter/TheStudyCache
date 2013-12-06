@@ -239,10 +239,15 @@ height: 100%;
 	background-color:rgba(0,0,0,0.9); 
 }
 
+.btn-primary
+{
+	font-weight: bold;
+}
+
 .dv-heading-right
 {	color:#FFF;
 	position: relative;
-	z-index: 2;
+	z-index: 4;
 	min-height: 60px;
 	max-height: 60px;
 	padding: 10px 15px;

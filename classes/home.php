@@ -54,7 +54,8 @@ function dv_callback(data) {
     $('.dv-body').append(data['summary']);
     var regex = /(?:\.([^.]+))?$/;
     var ext = regex.exec(data['path'])[1];
-    if( ext.match(/png|JAVA|java|pdf|jpg|png|jpeg|txt|css|cpp|js|h/i) )
+    ext = ext+".";
+    if( ext.match(/png.|JAVA.|java.|pdf.|jpg.|png.|jpeg.|txt.|css.|cpp.|js.|h.|c./i) )
       $('.embedded').append('<iframe id="content" scrolling="yes" class="background" background-position="center" src="../classes/'+data['path']+'" style="background-color:white"></iframe>');
     else
       $('.embedded').append('<iframe src="http://docs.google.com/viewer?url=http%3A%2F%2Fstudy.cs.sunyit.edu%2Fclasses%2F'+ data['path'] +'&embedded=true" width="600" height="780" style="border: none;"></iframe>');

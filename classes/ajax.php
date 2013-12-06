@@ -131,7 +131,7 @@ class Ajax {
 
 
 	function up($pid, $uid) {
-		$sql = "INSERT INTO rating (pid, composit_id, score) VALUES (? , ?, -1) ON DUPLICATE KEY UPDATE score = 1";
+		$sql = "INSERT INTO rating (pid, composit_id, score) VALUES (? , ?, 1) ON DUPLICATE KEY UPDATE score = 1";
 
 		$composit = $pid.".".$uid;
 		if($try = $this->con->prepare($sql)) {
