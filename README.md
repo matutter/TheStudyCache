@@ -1,3 +1,9 @@
+This repo contains a class project.    
+Uses, Apache, MySQL, PHP, Bootstrap, Jquery.   
+__It's a group project.__   
+You know what that means.
+__________________
+
 TheStudyCache
 =============
 
